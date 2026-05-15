@@ -1,0 +1,30 @@
+name: Update disease radar
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * 1"
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Update radar data
+        run: python scripts/trial_radar.py --config configs/lupus.json --out . --page-size 1000 --timeout 45 --retries 3
+
+      - name: Commit updated data
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update lupus research radar data"

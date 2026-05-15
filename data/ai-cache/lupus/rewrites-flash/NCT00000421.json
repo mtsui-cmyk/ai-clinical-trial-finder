@@ -1,0 +1,40 @@
+{
+  "_meta": {
+    "cache_key": "NCT00000421:2016-03-04",
+    "model": "deepseek-v4-flash",
+    "source": "deepseek_chat_completions_api",
+    "trial_id": "NCT00000421"
+  },
+  "may_be_looking_for": [
+    "People who meet the American College of Rheumatology (ACR) criteria for systemic lupus erythematosus (SLE)",
+    "People whose lupus is inactive or stable",
+    "People with a history of positive dsDNA antibodies",
+    "People currently taking no more than 15 mg of prednisone daily"
+  ],
+  "may_exclude_people_who": [
+    "Have active infections",
+    "Have poorly controlled diabetes",
+    "Are pregnant",
+    "Have uncontrolled high blood pressure"
+  ],
+  "patient_summary": "This study explored whether a blood protein called C3a can help predict lupus flares. Researchers also tested if early treatment based on C3a and dsDNA antibodies, before physical symptoms appear, could reduce the number of flares and the total amount of steroids needed. Participants were followed for one year.",
+  "patient_title": "Study of C3a Blood Test to Predict Lupus Flares",
+  "questions_to_ask_clinician": [
+    "What would it mean if my C3a levels are elevated?",
+    "How is my lupus activity currently being monitored?",
+    "What are the potential benefits and risks of taking prednisone before symptoms appear?"
+  ],
+  "source_grounding": [
+    "brief_summary",
+    "conditions",
+    "eligibility_excerpt",
+    "interventions",
+    "phase",
+    "title"
+  ],
+  "uncertainty_notes": [
+    "This study is a Phase 2 trial that has been completed, so results are not yet part of standard care.",
+    "The use of C3a to guide lupus treatment is still experimental and requires further research."
+  ],
+  "what_researchers_are_studying": "Researchers are studying whether increasing levels of C3a and dsDNA antibodies can predict an upcoming lupus flare. They are also testing if giving prednisone at that point, compared to a placebo, can prevent the flare from happening."
+}

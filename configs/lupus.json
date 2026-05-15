@@ -1,0 +1,23 @@
+{
+  "slug": "lupus",
+  "name": "Lupus Research Radar",
+  "description": "Public clinical research signals for systemic lupus erythematosus and lupus nephritis.",
+  "source": "ClinicalTrials.gov",
+  "queries": [
+    {
+      "label": "systemic lupus erythematosus",
+      "condition": "systemic lupus erythematosus"
+    },
+    {
+      "label": "lupus nephritis",
+      "condition": "lupus nephritis"
+    }
+  ],
+  "exclude_condition_terms": [
+    "discoid lupus"
+  ],
+  "report": {
+    "top_n": 12
+  }
+}
+

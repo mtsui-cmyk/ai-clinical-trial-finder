@@ -1,0 +1,40 @@
+{
+  "_meta": {
+    "cache_key": "NCT00001789:2008-03-04",
+    "model": "deepseek-v4-flash",
+    "source": "deepseek_chat_completions_api",
+    "trial_id": "NCT00001789"
+  },
+  "may_be_looking_for": [
+    "Adults aged 18 years or older",
+    "A kidney biopsy within the past 5 years showing active lupus nephritis (WHO Class III, IV, or mixed membranous and proliferative)",
+    "Protein in urine of 1 gram or more per day (measured twice before starting the study)",
+    "At least one of the following: high levels of anti-dsDNA antibodies, low C3 complement levels, blood in urine, or urinary casts"
+  ],
+  "may_exclude_people_who": [
+    "Have a medical disorder that, in the investigator's opinion, would make the study unsafe or inappropriate",
+    "Have had a prior arterial or venous thrombosis, or a history of recurrent clotting events"
+  ],
+  "patient_summary": "This study looked at whether the experimental drug BG9588 (anti-CD40L antibody) was being studied for lupus nephritis with different side-effect questions compared with standard treatments like cyclophosphamide, azathioprine, and prednisone. It was a Phase 2 study completed in the United States.",
+  "patient_title": "A Study of BG9588 for Lupus Nephritis",
+  "questions_to_ask_clinician": [
+    "What are the potential benefits and risks of BG9588 compared to standard lupus nephritis treatments?",
+    "What tests and procedures are involved in this study?",
+    "How would this study affect my current lupus treatment and medications?"
+  ],
+  "source_grounding": [
+    "title",
+    "brief_summary",
+    "condition",
+    "interventions",
+    "phase",
+    "status",
+    "countries",
+    "eligibility_excerpt"
+  ],
+  "uncertainty_notes": [
+    "This was a Phase 2 study, so the study outcomes and safety of BG9588 for lupus nephritis are still being investigated.",
+    "The study is already completed, so results may be available but are not included in this summary."
+  ],
+  "what_researchers_are_studying": "Researchers are studying if BG9588 can reduce kidney damage in people with lupus nephritis by interfering with the production of antibodies that attack the kidneys. They are also looking at how the drug enters and leaves the body, its side effects, and whether it can be more associated with the study outcome and less toxic than current therapies."
+}

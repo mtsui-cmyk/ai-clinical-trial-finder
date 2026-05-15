@@ -1,0 +1,53 @@
+{
+  "protocolSection": {
+    "identificationModule": {
+      "nctId": "NCT00000002",
+      "briefTitle": "Wearable Monitoring Device in Systemic Lupus Erythematosus"
+    },
+    "statusModule": {
+      "overallStatus": "COMPLETED",
+      "lastUpdatePostDateStruct": {
+        "date": "2026-04-10"
+      },
+      "resultsFirstPostDateStruct": {
+        "date": "2026-04-20"
+      }
+    },
+    "sponsorCollaboratorsModule": {
+      "leadSponsor": {
+        "name": "Example University",
+        "class": "OTHER"
+      }
+    },
+    "conditionsModule": {
+      "conditions": [
+        "Systemic Lupus Erythematosus"
+      ]
+    },
+    "designModule": {
+      "studyType": "OBSERVATIONAL"
+    },
+    "armsInterventionsModule": {
+      "interventions": [
+        {
+          "type": "DEVICE",
+          "name": "Example Wearable Sensor"
+        }
+      ]
+    },
+    "contactsLocationsModule": {
+      "locations": [
+        {
+          "country": "India"
+        }
+      ]
+    },
+    "oversightModule": {
+      "isFdaRegulatedDevice": true
+    }
+  },
+  "resultsSection": {
+    "participantFlowModule": {}
+  }
+}
+

@@ -1,0 +1,46 @@
+{
+  "_meta": {
+    "cache_key": "NCT00000419:2013-05-03",
+    "model": "deepseek-v4-pro",
+    "source": "deepseek_chat_completions_api",
+    "trial_id": "NCT00000419"
+  },
+  "may_be_looking_for": [
+    "Postmenopausal women (those who had stopped periods for at least 6 months or had blood tests showing menopause)",
+    "Women with a confirmed diagnosis of lupus (SLE)",
+    "Women whose lupus disease was inactive or stable on low-dose prednisone (0.5 mg/kg/day or less)"
+  ],
+  "may_exclude_people_who": [
+    "Women who had high blood pressure (over 145/95) on three occasions",
+    "Women with a history of blood clots (deep vein thrombosis, arterial thrombosis, or pulmonary embolus)",
+    "Women with certain blood test results (GPL >40, MPL >40, APL >50, dRVVT >37 seconds)",
+    "Women who ever had antiphospholipid antibody syndrome",
+    "Women with a history of gynecologic or breast cancer",
+    "Women with liver problems or liver tumors",
+    "Women with diabetes (not caused by steroids) that caused blood vessel disease",
+    "Women with inherited high cholesterol (congenital hyperlipidemia)",
+    "Women with complicated migraines",
+    "Women with very active lupus (SLEDAI score over 12)",
+    "Women whose lupus disease activity had increased by more than 2 SLEDAI points in 3 months",
+    "Women with unexplained vaginal bleeding",
+    "Women who had used estrogen (hormone replacement therapy or birth control pills) for more than one month at any time after their lupus diagnosis",
+    "Women with FSH level below 40",
+    "Women who had a heart attack before menopause"
+  ],
+  "patient_summary": "This study investigated whether postmenopausal women with lupus (systemic lupus erythematosus) could safely use estrogen hormone replacement therapy (Premarin and Provera). It looked at how the therapy might affect lupus disease activity and severity.",
+  "patient_title": "Safety of Hormone Replacement Therapy in Lupus",
+  "questions_to_ask_clinician": [
+    "How safe is estrogen replacement therapy for women with lupus?",
+    "What tests would be needed to check if I am postmenopausal?",
+    "How would my lupus disease activity be monitored during hormone therapy?",
+    "What are the potential risks and benefits of hormone replacement therapy in lupus?",
+    "Since this study was terminated, what other research or treatment options are available for menopause symptoms in lupus?"
+  ],
+  "source_grounding": [
+    "This information is based on a terminated Phase 3 clinical trial titled 'Safety of Estrogens in Lupus: Hormone Replacement Therapy', studying Premarin and Provera in postmenopausal women with systemic lupus erythematosus in the United States."
+  ],
+  "uncertainty_notes": [
+    "This study was terminated early, so the results about safety and effects on lupus activity may be limited or inconclusive. The criteria listed reflect what the study planned to use, but the full evaluation was not completed."
+  ],
+  "what_researchers_are_studying": "Researchers studied the safety and effects of hormone replacement therapy (Premarin and Provera) in postmenopausal women with lupus, focusing on changes in disease activity."
+}

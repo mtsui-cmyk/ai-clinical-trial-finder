@@ -1,0 +1,49 @@
+{
+  "_meta": {
+    "cache_key": "NCT00000420:2013-05-03",
+    "model": "deepseek-v4-flash",
+    "source": "deepseek_chat_completions_api",
+    "trial_id": "NCT00000420"
+  },
+  "may_be_looking_for": [
+    "Women with a definite diagnosis of lupus",
+    "Aged 18-39 if non-smoker, or 18-35 if smoker",
+    "Inactive disease or stable on low-dose prednisone (0.5 mg/kg/day or less)"
+  ],
+  "may_exclude_people_who": [
+    "Have high blood pressure over 145/95 on three occasions",
+    "Have had deep vein thrombosis, arterial thrombosis, or pulmonary embolism",
+    "Have elevated antiphospholipid antibodies (GPL >40, MPL >40, APL >50, dRVVT >37 sec)",
+    "Have antiphospholipid antibody syndrome",
+    "Have gynecologic or breast cancer",
+    "Have liver dysfunction or tumors",
+    "Have diabetes with vascular disease (not due to steroids)",
+    "Have congenital hyperlipidemia",
+    "Have complicated migraine",
+    "Have severe lupus activity (SLEDAI >12) or recent increase in activity",
+    "Have unexplained vaginal bleeding",
+    "Used estrogen-containing birth control for more than 1 month since lupus diagnosis",
+    "Are currently pregnant",
+    "Have had angina or heart attack due to antiphospholipid syndrome",
+    "Are over 35 years old if smoker, or over 39 if non-smoker"
+  ],
+  "patient_summary": "This study aimed to test safety questions about estrogen use in women with systemic lupus erythematosus (SLE or lupus). The researchers looked at the effects of birth control pills on disease activity and severity in women with SLE.",
+  "patient_title": "Safety of Estrogen in Lupus: A Study on Birth Control Pills",
+  "questions_to_ask_clinician": [
+    "What are the risks of using estrogen-containing birth control for someone with lupus?",
+    "Are there non-hormonal birth control options that might be safer?",
+    "How can I monitor lupus activity if I choose to use birth control pills?"
+  ],
+  "source_grounding": [
+    "title",
+    "brief_summary",
+    "eligibility_excerpt",
+    "interventions",
+    "phase",
+    "status"
+  ],
+  "uncertainty_notes": [
+    "This study has been completed. The results may provide information about the safety of estrogen-containing birth control pills in women with lupus, but individual risks should be discussed with a doctor."
+  ],
+  "what_researchers_are_studying": "The safety of estrogen-containing birth control pills (like Ortho-Novum 777) in women with lupus."
+}

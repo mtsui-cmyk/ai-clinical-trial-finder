@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Find Trials - TrialCompass</title>
+  <style>
+    :root {
+      --ink: #24211d;
+      --muted: #6f6a60;
+      --line: #d8d2c5;
+      --bg: #f6f3ed;
+      --surface: #fffdf8;
+      --soft: #f3edf2;
+      --accent: #6d3f5f;
+      --accent-dark: #56304b;
+      --warn: #8a5a12;
+      --ok: #436f4d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+    a { color: inherit; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 22px 28px; }
+    .nav { border-bottom: 1px solid var(--line); background: rgba(255,255,255,.96); position: sticky; top: 0; z-index: 4; }
+    .nav .wrap { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding-top: 12px; padding-bottom: 12px; }
+    .brand { font-weight: 800; text-decoration: none; }
+    .links { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .links a { color: var(--muted); font-size: 13px; font-weight: 750; text-decoration: none; padding: 7px 8px; border-radius: 6px; }
+    .links a:hover, .links a.active { background: var(--soft); color: var(--accent); }
+    header { background: var(--surface); border-bottom: 1px solid var(--line); }
+    .eyebrow { color: var(--accent); font-size: 12px; text-transform: uppercase; font-weight: 800; }
+    h1 { font-size: clamp(30px, 4vw, 44px); line-height: 1.08; margin: 8px 0 10px; letter-spacing: 0; max-width: 760px; }
+    h2 { font-size: 20px; margin: 0 0 10px; letter-spacing: 0; }
+    h3 { font-size: 16px; margin: 0 0 8px; letter-spacing: 0; }
+    p { color: var(--muted); margin: 0 0 12px; max-width: 820px; }
+    .lead { font-size: 16px; color: #514b43; }
+    .search-panel {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 4px;
+      padding: 18px;
+      margin-top: 22px;
+    }
+    .search-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) 150px auto;
+      gap: 12px;
+      align-items: end;
+    }
+    label { display: grid; gap: 6px; color: var(--muted); font-size: 13px; font-weight: 650; }
+    input, select, button {
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+      padding: 10px 12px;
+    }
+    input:focus, select:focus { outline: 3px solid rgba(109,63,95,.18); border-color: var(--accent); }
+    button {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fffdf8;
+      cursor: pointer;
+      font-weight: 800;
+    }
+    button:hover { background: var(--accent-dark); }
+    .source-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+    .source-summary { color: #514b43; font-size: 14px; font-weight: 700; }
+    details { width: 100%; }
+    summary {
+      display: inline-flex;
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 14px;
+      list-style: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .source-item {
+      border: 1px solid var(--line);
+      background: #fbf8f1;
+      border-radius: 4px;
+      padding: 11px;
+      min-height: 126px;
+    }
+    .source-top { display: flex; gap: 8px; align-items: flex-start; }
+    .source-top input { min-height: auto; margin-top: 3px; }
+    .source-name { font-weight: 800; }
+    .source-meta { color: var(--muted); font-size: 12px; margin-top: 2px; }
+    .tag {
+      display: inline-block;
+      border: 1px solid #d4c3d1;
+      background: var(--soft);
+      color: var(--accent);
+      border-radius: 4px;
+      padding: 3px 7px;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 750;
+    }
+    .tag.planned { background: #fff8ea; color: var(--warn); border-color: #ead7ac; }
+    .tag.external_link_only { background: #f0f6ef; color: var(--ok); border-color: #ccddc8; }
+    .small { font-size: 13px; color: var(--muted); }
+    .notice {
+      border: 1px solid #f0dfb8;
+      background: #fffaf0;
+      color: #46340f;
+      padding: 10px 12px;
+      border-radius: 4px;
+      margin-top: 14px;
+      font-size: 13px;
+    }
+    .ai-panel {
+      border: 1px solid #d4c3d1;
+      background: var(--soft);
+      color: #3f2d39;
+      border-radius: 4px;
+      padding: 12px;
+      margin-top: 14px;
+      font-size: 13px;
+    }
+    .ai-panel strong { color: var(--accent); }
+    .radar-list {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: #3f3a34;
+    }
+    .radar-list li { margin: 4px 0; }
+    main .wrap { padding-top: 24px; padding-bottom: 48px; }
+    .result-toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+    .messages { margin-bottom: 12px; }
+    .message {
+      border: 1px solid var(--line);
+      background: #fbf8f1;
+      border-radius: 4px;
+      padding: 10px 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .results { display: grid; gap: 12px; }
+    .trial {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 4px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 250px;
+      gap: 16px;
+    }
+    .site-block {
+      border-left: 4px solid var(--accent);
+      background: #fbf8f1;
+      padding: 10px 12px;
+    }
+    .site-block strong { display: block; color: var(--ink); overflow-wrap: anywhere; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+    .pill {
+      display: inline-block;
+      border: 1px solid var(--line);
+      background: #fbf8f1;
+      color: var(--muted);
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: 650;
+    }
+    .pill.strong { color: var(--accent); border-color: #d4c3d1; background: var(--soft); }
+    .trial h3 { font-size: 17px; margin-top: 0; overflow-wrap: anywhere; }
+    .trial-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; }
+    .trial-actions a, .trial-actions button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 7px 10px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 750;
+    }
+    .trial-actions a { border: 1px solid var(--line); color: var(--ink); background: #fffdf8; }
+    .empty, .error {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      padding: 18px;
+      border-radius: 4px;
+    }
+    .error { border-color: #e6b8b8; background: #fff5f5; color: #6f2a2a; }
+    dialog {
+      width: min(920px, calc(100vw - 28px));
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 0;
+      background: var(--surface);
+      color: var(--ink);
+    }
+    dialog::backdrop { background: rgba(36, 33, 29, .45); }
+    .modal-body { padding: 20px; max-height: 82vh; overflow: auto; }
+    .close-row { display: flex; justify-content: flex-end; margin-bottom: 10px; }
+    .detail-grid { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 18px; align-items: start; }
+    .detail-box { border: 1px solid var(--line); background: #fbf8f1; border-radius: 4px; padding: 12px; }
+    ul { padding-left: 20px; color: #3f3a34; }
+    li { margin: 6px 0; }
+    @media (max-width: 880px) {
+      .nav .wrap, .result-toolbar { display: block; }
+      .links { justify-content: flex-start; margin-top: 10px; }
+      .search-grid, .source-grid, .trial, .detail-grid { grid-template-columns: 1fr; }
+      .search-grid button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap">
+      <a class="brand" href="index.html">TrialCompass</a>
+      <div class="links" aria-label="Main navigation">
+        <a class="active" href="finder.html">Find</a>
+        <a href="explorer.html">Learn</a>
+        <a href="changes.html">Updates</a>
+      </div>
+    </div>
+  </nav>
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">Source-selected trial finder</div>
+      <h1>Find public trial records near a city or postcode.</h1>
+      <p class="lead">Choose public data sources, type a condition and place, then review registry records that may be recruiting nearby.</p>
+      <form id="search-form" class="search-panel">
+        <div class="search-grid">
+          <label>Condition
+            <input id="condition" name="condition" list="condition-suggestions" value="systemic lupus erythematosus" autocomplete="off">
+            <datalist id="condition-suggestions"></datalist>
+          </label>
+          <label>City or postcode
+            <input id="location" name="location" value="Shanghai" autocomplete="off" placeholder="City, postcode, or place name">
+          </label>
+          <label>Radius
+            <select id="radius" name="radius">
+              <option value="50">50 km</option>
+              <option value="100" selected>100 km</option>
+              <option value="250">250 km</option>
+              <option value="500">500 km</option>
+            </select>
+          </label>
+          <button type="submit">Search</button>
+        </div>
+        <div class="source-row">
+          <span id="source-summary" class="source-summary">ClinicalTrials.gov selected</span>
+          <details id="advanced-sources">
+            <summary>Advanced sources</summary>
+            <p class="small">ClinicalTrials.gov is connected. Other official registries are visible for coverage planning and manual verification until their connectors are validated.</p>
+            <div id="sources" class="source-grid"></div>
+          </details>
+        </div>
+        <div class="notice">Public registry data only. Type a city, postcode, or place name; browser location permission is not required. Verify details in the official registry. Not medical advice. This tool does not determine eligibility.</div>
+        <div class="ai-panel"><strong>AI Research Radar appears after search:</strong> it explains public registry fields, highlights what to verify, and drafts clinician discussion questions. It does not recommend trials or determine eligibility.</div>
+      </form>
+    </div>
+  </header>
+  <main>
+    <div class="wrap">
+      <div class="result-toolbar">
+        <div>
+          <h2>Results</h2>
+          <p id="summary">Run a search to load current public registry records.</p>
+        </div>
+      </div>
+      <div id="messages" class="messages"></div>
+      <div id="results" class="results"></div>
+    </div>
+  </main>
+  <dialog id="detail-modal">
+    <div class="modal-body">
+      <div class="close-row"><button type="button" id="close-detail">Close</button></div>
+      <div id="detail-content"></div>
+    </div>
+  </dialog>
+  <script>
+    const sourcesEl = document.getElementById('sources');
+    const resultsEl = document.getElementById('results');
+    const messagesEl = document.getElementById('messages');
+    const summaryEl = document.getElementById('summary');
+    const sourceSummaryEl = document.getElementById('source-summary');
+    const modal = document.getElementById('detail-modal');
+    const detailContent = document.getElementById('detail-content');
+    const initialParams = new URLSearchParams(window.location.search);
+
+    if (initialParams.get('condition')) document.getElementById('condition').value = initialParams.get('condition');
+    if (initialParams.get('location')) document.getElementById('location').value = initialParams.get('location');
+
+    document.getElementById('close-detail').addEventListener('click', () => modal.close());
+
+    async function loadSources() {
+      const res = await fetch('/api/sources');
+      const data = await res.json();
+      sourcesEl.innerHTML = data.sources.map(source => `
+        <label class="source-item">
+          <span class="source-top">
+            <input type="checkbox" class="source-check" value="${escapeAttr(source.id)}" ${source.default_selected ? 'checked' : ''}>
+            <span>
+              <span class="source-name">${escapeHtml(source.name)}</span>
+              <span class="source-meta">${escapeHtml(source.operator)}</span>
+              <span class="tag ${escapeAttr(source.status)}">${escapeHtml(source.status.replaceAll('_', ' '))}</span>
+            </span>
+          </span>
+          <span class="source-meta">${escapeHtml(source.limitations)}</span>
+        </label>
+      `).join('');
+      document.querySelectorAll('.source-check').forEach(item => item.addEventListener('change', updateSourceSummary));
+      updateSourceSummary();
+    }
+
+    function updateSourceSummary() {
+      const checked = Array.from(document.querySelectorAll('.source-check:checked'));
+      const labels = checked.map(item => item.closest('.source-item').querySelector('.source-name').textContent.trim());
+      sourceSummaryEl.textContent = labels.length ? `${labels.join(', ')} selected` : 'No source selected';
+    }
+
+    document.getElementById('condition').addEventListener('input', async event => {
+      const q = event.target.value.trim();
+      if (q.length < 2) return;
+      const res = await fetch(`/api/conditions/suggest?q=${encodeURIComponent(q)}`);
+      const data = await res.json();
+      document.getElementById('condition-suggestions').innerHTML = data.suggestions
+        .map(item => `<option value="${escapeAttr(item.condition_text)}">${escapeHtml(item.label)}</option>`)
+        .join('');
+    });
+
+    document.getElementById('search-form').addEventListener('submit', async event => {
+      event.preventDefault();
+      resultsEl.innerHTML = '';
+      messagesEl.innerHTML = '';
+      summaryEl.textContent = 'Searching selected public sources...';
+      const sourceIds = Array.from(document.querySelectorAll('.source-check:checked')).map(item => item.value);
+      const payload = {
+        condition_text: document.getElementById('condition').value,
+        location_text: document.getElementById('location').value,
+        radius_km: Number(document.getElementById('radius').value),
+        source_ids: sourceIds,
+        statuses: ['RECRUITING', 'NOT_YET_RECRUITING', 'ENROLLING_BY_INVITATION'],
+        limit: 50
+      };
+      try {
+        const res = await fetch('/api/search', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) throw new Error(await res.text());
+        const data = await res.json();
+        renderMessages(data.sources || []);
+        renderResults(data);
+      } catch (error) {
+        summaryEl.textContent = 'Search failed.';
+        messagesEl.innerHTML = `<div class="error">${escapeHtml(error.message)}</div>`;
+      }
+    });
+
+    function renderMessages(messages) {
+      if (!messages.length) return;
+      messagesEl.innerHTML = `<div class="message">${messages.map(message => `${escapeHtml(message.source_id)}: ${escapeHtml(message.message)}`).join('<br>')}</div>`;
+    }
+
+    function renderResults(data) {
+      summaryEl.textContent = `${data.count} public trial records returned. ${data.safety_note}`;
+      if (!data.results.length) {
+        resultsEl.innerHTML = '<div class="empty">No nearby public trial records were returned for this search. Try a broader radius, fewer source filters, or verify directly in the official registry.</div>';
+        return;
+      }
+      resultsEl.innerHTML = data.results.map(renderTrial).join('');
+      document.querySelectorAll('[data-detail-key]').forEach(button => {
+        button.addEventListener('click', () => loadDetail(button.dataset.detailKey));
+      });
+    }
+
+    function renderTrial(trial) {
+      const nearest = trial.nearest_location || {};
+      const distance = trial.distance_km == null ? 'Distance not listed' : `${trial.distance_km} km away`;
+      const location = [nearest.facility, nearest.city, nearest.state, nearest.country].filter(Boolean).join(', ') || 'Location not listed';
+      const siteStatus = nearest.status ? nearest.status.replaceAll('_', ' ') : 'Site status not listed';
+      return `
+        <article class="trial">
+          <div>
+            <div class="site-block">
+              <span class="small">Nearest listed site</span>
+              <strong>${escapeHtml(location)}</strong>
+              <span class="small">${escapeHtml(distance)} · ${escapeHtml(siteStatus)}</span>
+            </div>
+            <div class="meta-row">
+              <span class="pill strong">Trial status: ${escapeHtml((trial.status || 'Not listed').replaceAll('_', ' '))}</span>
+              <span class="pill">Source: ${escapeHtml(trial.registry || 'Registry')}</span>
+              <span class="pill">${escapeHtml(trial.phase || 'Phase not listed')}</span>
+            </div>
+            <h3>${escapeHtml(trial.title || 'Public trial record')}</h3>
+            <p>${escapeHtml((trial.conditions || []).slice(0, 3).join(', ') || 'Condition not listed')}</p>
+            <p>${escapeHtml((trial.intervention_names || []).slice(0, 4).join(', ') || 'Intervention not listed')}</p>
+            <div class="trial-actions">
+              <button type="button" data-detail-key="${escapeAttr(trial.canonical_trial_key)}">Review record</button>
+              <a href="${escapeAttr(trial.source_url)}" target="_blank" rel="noreferrer">Official registry</a>
+            </div>
+          </div>
+          <aside>
+            ${renderRadarBrief(trial.research_radar)}
+            <p class="small">This result may be recruiting near this location. Verify details in the official registry; this is not medical advice.</p>
+          </aside>
+        </article>
+      `;
+    }
+
+    function renderRadarBrief(radar) {
+      if (!radar) return '';
+      return `
+        <div class="ai-panel">
+          <strong>AI Research Radar</strong>
+          <p class="small">${escapeHtml(radar.summary || 'Public registry reading aid.')}</p>
+          <ul class="radar-list">${(radar.signals || []).slice(0, 2).map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+        </div>
+      `;
+    }
+
+    async function loadDetail(key) {
+      const res = await fetch(`/api/trials/${encodeURIComponent(key)}`);
+      if (!res.ok) {
+        detailContent.innerHTML = '<div class="error">Trial detail is not available. Run the search again or open the official registry.</div>';
+        modal.showModal();
+        return;
+      }
+      const data = await res.json();
+      const trial = data.trial;
+      const nearest = trial.nearest_location || {};
+      detailContent.innerHTML = `
+        <h2>${escapeHtml(trial.title || 'Public trial record')}</h2>
+        <p class="notice">${escapeHtml(trial.finder_safety_note || 'Verify details in the official registry. This tool does not determine eligibility and is not medical advice.')}</p>
+        <div class="detail-grid">
+          <div>
+            <h3>AI Research Radar</h3>
+            <div class="ai-panel">
+              <strong>${escapeHtml((trial.research_radar || {}).mode || 'Public registry reading aid')}</strong>
+              <p class="small">${escapeHtml((trial.research_radar || {}).summary || 'This reading aid summarizes public registry fields only.')}</p>
+              <ul class="radar-list">${((trial.research_radar || {}).signals || []).map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+              <p class="small">${escapeHtml((trial.research_radar || {}).safety_note || 'AI may explain public registry fields, but must not recommend a trial or decide eligibility.')}</p>
+            </div>
+            <h3>Nearest listed site</h3>
+            <div class="site-block">
+              <strong>${escapeHtml([nearest.facility, nearest.city, nearest.state, nearest.country].filter(Boolean).join(', ') || 'Location not listed')}</strong>
+              <span class="small">${escapeHtml(nearest.status || 'Site status not listed')}</span>
+            </div>
+            <h3>Official registry text to verify</h3>
+            <p>${escapeHtml((trial.eligibility || {}).criteria_excerpt || 'Eligibility text is not listed in this normalized view. Verify details in the official registry.')}</p>
+            <h3>Questions to discuss with a clinician</h3>
+            <ul>${(trial.questions_to_ask || []).map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+          </div>
+          <aside class="detail-box">
+            <h3>Record fields</h3>
+            <p><strong>Status:</strong> ${escapeHtml(trial.status || 'Not listed')}</p>
+            <p><strong>Phase:</strong> ${escapeHtml(trial.phase || 'Not listed')}</p>
+            <p><strong>Source:</strong> ${escapeHtml(trial.registry || 'Registry')}</p>
+            <h3>Source records</h3>
+            <ul>${(trial.source_records || []).map(item => `<li><a href="${escapeAttr(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.source)}: ${escapeHtml(item.record_id)}</a></li>`).join('')}</ul>
+          </aside>
+        </div>
+        <h3>All listed locations</h3>
+        ${renderLocations(trial.locations || [])}
+      `;
+      modal.showModal();
+    }
+
+    function renderLocations(locations) {
+      if (!locations.length) return '<p class="small">No locations listed in the normalized record.</p>';
+      return `<ul>${locations.slice(0, 20).map(site => {
+        const distance = site.distance_km == null ? '' : ` (${escapeHtml(String(site.distance_km))} km)`;
+        const contacts = (site.contacts || []).filter(c => c.email || c.phone).slice(0, 2)
+          .map(c => `${escapeHtml(c.name || c.role || 'Contact')}: ${escapeHtml(c.email || c.phone)}`).join('<br>');
+        return `<li><strong>${escapeHtml(site.facility || 'Facility not listed')}</strong>${distance}<br>${escapeHtml([site.city, site.state, site.zip, site.country].filter(Boolean).join(', '))}${contacts ? `<br>${contacts}` : ''}</li>`;
+      }).join('')}</ul>`;
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+    }
+    function escapeAttr(value) { return escapeHtml(value); }
+
+    loadSources();
+  </script>
+</body>
+</html>

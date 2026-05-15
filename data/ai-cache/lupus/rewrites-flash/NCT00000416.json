@@ -1,0 +1,41 @@
+{
+  "_meta": {
+    "cache_key": "NCT00000416:2017-07-26",
+    "model": "deepseek-v4-flash",
+    "source": "deepseek_chat_completions_api",
+    "trial_id": "NCT00000416"
+  },
+  "may_be_looking_for": [
+    "Adults with rheumatic disorders such as ankylosing spondylitis, knee osteoarthritis, rheumatoid arthritis, or systemic lupus erythematosus",
+    "Currently employed (full or part time)",
+    "Live in selected communities in eastern Massachusetts"
+  ],
+  "may_exclude_people_who": [
+    "Plan to move from the area",
+    "Plan to have joint replacement surgery within the next 6 months",
+    "Plan to retire or go on disability within the next 2 years"
+  ],
+  "patient_summary": "People with rheumatic disorders such as arthritis often have trouble keeping their jobs. This study looked at whether vocational rehabilitation (VR) can improve the ability of employed people with arthritis to keep their jobs. The study was conducted in eastern Massachusetts. Participants were divided into two groups: one received job retention services from VR counselors, and the other received literature about employment resources. The study compared outcomes to evaluate the usefulness of job retention services in preventing job loss.",
+  "patient_title": "Can Vocational Rehabilitation Help People with Arthritis Keep Their Jobs?",
+  "questions_to_ask_clinician": [
+    "What were the findings of this completed study on vocational rehabilitation for arthritis?",
+    "Are there any similar studies currently enrolling participants in my area?",
+    "What vocational rehabilitation services are available locally for people with rheumatic disorders?",
+    "Would I be a good candidate for a vocational rehabilitation program based on my individual situation?"
+  ],
+  "source_grounding": [
+    "brief_summary",
+    "conditions",
+    "countries",
+    "eligibility_excerpt",
+    "interventions",
+    "phase",
+    "status",
+    "title"
+  ],
+  "uncertainty_notes": [
+    "The study has been completed, but the outcomes are not summarized in this description.",
+    "The study outcomes of vocational rehabilitation may vary based on individual factors and local resources."
+  ],
+  "what_researchers_are_studying": "Researchers are studying whether vocational rehabilitation (VR) can improve job retention for employed people with rheumatic disorders. Job retention VR services target key factors that increase the risk of job loss, such as modifying jobs to reduce barriers caused by functional limitations and disease symptoms, future career planning, and establishing a partnership with a VR counselor for ongoing help."
+}

@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Publications - Lupus Research Radar</title>
+  <style>
+    :root {
+      --ink: #24211d;
+      --muted: #6f6a60;
+      --line: #d8d2c5;
+      --bg: #f6f3ed;
+      --surface: #fffdf8;
+      --accent: #6d3f5f;
+      --accent-soft: #f3edf2;
+      --warn: #8a5a12;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+    header { background: var(--surface); border-bottom: 1px solid var(--line); }
+    section { background: var(--surface); border-bottom: 1px solid var(--line); }
+    section:nth-child(even) { background: #fbf8f1; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 24px; }
+    .app-nav { border-bottom: 1px solid var(--line); background: rgba(255,255,255,.96); position: sticky; top: 0; z-index: 5; }
+    .app-nav .wrap { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding-top: 12px; padding-bottom: 12px; }
+    .brand { color: var(--ink); font-weight: 800; text-decoration: none; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+    .nav-links a { color: var(--muted); font-size: 13px; font-weight: 750; text-decoration: none; padding: 7px 8px; border-radius: 6px; }
+    .nav-links a:hover { background: var(--accent-soft); color: var(--accent); }
+    .boundary { color: var(--muted); font-size: 13px; margin-top: 10px; }
+    .eyebrow { color: var(--accent); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0; }
+    h1 { margin: 8px 0 10px; font-size: clamp(28px, 4vw, 44px); line-height: 1.08; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 22px; letter-spacing: 0; }
+    h3 { margin: 18px 0 8px; font-size: 17px; letter-spacing: 0; }
+    p { color: var(--muted); }
+    a { color: #5c3b72; text-decoration-thickness: 1px; }
+    .plain { color: #3f3a34; max-width: 860px; }
+    .notice { border-left: 4px solid var(--warn); background: #fff8ea; padding: 14px 16px; color: #46340f; margin-top: 16px; }
+    .ai-note { border-left: 4px solid #77506f; background: #f5edf2; padding: 14px 16px; color: #4e3448; margin-top: 16px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .button { display: inline-block; border: 1px solid var(--line); background: #fffdf8; color: var(--ink); padding: 10px 12px; border-radius: 6px; text-decoration: none; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .box { border: 1px solid var(--line); background: #fbf8f1; padding: 13px; min-height: 86px; }
+    .box span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+    .box strong { display: block; overflow-wrap: anywhere; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; vertical-align: top; padding: 10px; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-size: 12px; text-transform: uppercase; background: #eee8dc; letter-spacing: 0; }
+    ul { padding-left: 20px; color: #3f3a34; }
+    li { margin: 6px 0; }
+    .trial-list { display: grid; gap: 12px; }
+    .trial-card { border: 1px solid var(--line); background: #fffdf8; padding: 15px; border-radius: 8px; }
+    .trial-card h3 { margin: 0 0 8px; font-size: 18px; line-height: 1.28; letter-spacing: 0; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+    .meta { color: var(--muted); font-size: 13px; }
+    .pill { display: inline-block; border: 1px solid var(--line); background: #fffdf8; color: var(--muted); border-radius: 4px; padding: 4px 8px; margin: 2px 4px 2px 0; font-size: 13px; }
+    .status-badge { display: inline-block; padding: 5px 8px; background: var(--accent-soft); color: var(--accent); border: 1px solid #d4c3d1; border-radius: 4px; font-size: 13px; font-weight: 700; }
+    .topic-layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 22px; align-items: start; }
+    .side-panel { border: 1px solid var(--line); background: #fffdf8; border-radius: 8px; padding: 15px; }
+    .compact-section { padding-top: 18px; padding-bottom: 18px; }
+    @media (max-width: 760px) {
+      .wrap { padding: 18px; }
+      .app-nav .wrap { display: block; }
+      .nav-links { justify-content: flex-start; margin-top: 8px; }
+      .grid { grid-template-columns: 1fr; }
+      .topic-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">PubMed source layer</div>
+      <h1>Publications Linked By Trial ID</h1>
+      <p class="plain">This page lists PubMed records found by searching public trial identifiers. A publication link is an evidence source, not a clinical recommendation or proof of treatment value.</p>
+      <div class="actions"><a class="button" href="index.html">Back to radar</a></div>
+    </div>
+  </header>
+  <main>
+    <section>
+      <div class="wrap">
+        <h2>Found Publications</h2>
+        <p class="plain">84 PubMed records are linked in the current source layer.</p>
+        <div class="trial-list"><article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35289316/" target="_blank" rel="noreferrer">Genetically programmed alternative splicing of NEMO mediates an autoinflammatory disease phenotype.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35289316</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 15</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35289316/" target="_blank" rel="noreferrer">Genetically programmed alternative splicing of NEMO mediates an autoinflammatory disease phenotype.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35289316</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 15</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35289316/" target="_blank" rel="noreferrer">Genetically programmed alternative splicing of NEMO mediates an autoinflammatory disease phenotype.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35289316</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 15</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35289316/" target="_blank" rel="noreferrer">Genetically programmed alternative splicing of NEMO mediates an autoinflammatory disease phenotype.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35289316</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 15</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35289316/" target="_blank" rel="noreferrer">Genetically programmed alternative splicing of NEMO mediates an autoinflammatory disease phenotype.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35289316</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 15</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35289316/" target="_blank" rel="noreferrer">Genetically programmed alternative splicing of NEMO mediates an autoinflammatory disease phenotype.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35289316</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 15</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35289316/" target="_blank" rel="noreferrer">Genetically programmed alternative splicing of NEMO mediates an autoinflammatory disease phenotype.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35289316</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 15</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35289316/" target="_blank" rel="noreferrer">Genetically programmed alternative splicing of NEMO mediates an autoinflammatory disease phenotype.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35289316</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 15</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35289316/" target="_blank" rel="noreferrer">Genetically programmed alternative splicing of NEMO mediates an autoinflammatory disease phenotype.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35289316</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 15</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35289316/" target="_blank" rel="noreferrer">Genetically programmed alternative splicing of NEMO mediates an autoinflammatory disease phenotype.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35289316</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 15</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35289316/" target="_blank" rel="noreferrer">Genetically programmed alternative splicing of NEMO mediates an autoinflammatory disease phenotype.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35289316</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 15</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35289316/" target="_blank" rel="noreferrer">Genetically programmed alternative splicing of NEMO mediates an autoinflammatory disease phenotype.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35289316</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 15</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35025762/" target="_blank" rel="noreferrer">Boosting NAD+ blunts TLR4-induced type I IFN in control and systemic lupus erythematosus monocytes.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35025762</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 1</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35025762/" target="_blank" rel="noreferrer">Boosting NAD+ blunts TLR4-induced type I IFN in control and systemic lupus erythematosus monocytes.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35025762</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 1</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35025762/" target="_blank" rel="noreferrer">Boosting NAD+ blunts TLR4-induced type I IFN in control and systemic lupus erythematosus monocytes.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35025762</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 1</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35025762/" target="_blank" rel="noreferrer">Boosting NAD+ blunts TLR4-induced type I IFN in control and systemic lupus erythematosus monocytes.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35025762</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 1</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35025762/" target="_blank" rel="noreferrer">Boosting NAD+ blunts TLR4-induced type I IFN in control and systemic lupus erythematosus monocytes.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35025762</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 1</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35025762/" target="_blank" rel="noreferrer">Boosting NAD+ blunts TLR4-induced type I IFN in control and systemic lupus erythematosus monocytes.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35025762</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 1</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35025762/" target="_blank" rel="noreferrer">Boosting NAD+ blunts TLR4-induced type I IFN in control and systemic lupus erythematosus monocytes.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35025762</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 1</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35025762/" target="_blank" rel="noreferrer">Boosting NAD+ blunts TLR4-induced type I IFN in control and systemic lupus erythematosus monocytes.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35025762</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 1</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35025762/" target="_blank" rel="noreferrer">Boosting NAD+ blunts TLR4-induced type I IFN in control and systemic lupus erythematosus monocytes.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35025762</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 1</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35025762/" target="_blank" rel="noreferrer">Boosting NAD+ blunts TLR4-induced type I IFN in control and systemic lupus erythematosus monocytes.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35025762</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 1</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35025762/" target="_blank" rel="noreferrer">Boosting NAD+ blunts TLR4-induced type I IFN in control and systemic lupus erythematosus monocytes.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35025762</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 1</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/35025762/" target="_blank" rel="noreferrer">Boosting NAD+ blunts TLR4-induced type I IFN in control and systemic lupus erythematosus monocytes.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 35025762</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">The Journal of clinical investigation</span>
+        <span class="meta">2022 Mar 1</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/29669944/" target="_blank" rel="noreferrer">Neutrophil subsets and their gene signature associate with vascular inflammation and coronary atherosclerosis in lupus.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 29669944</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">JCI insight</span>
+        <span class="meta">2018 Apr 19</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/29669944/" target="_blank" rel="noreferrer">Neutrophil subsets and their gene signature associate with vascular inflammation and coronary atherosclerosis in lupus.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 29669944</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">JCI insight</span>
+        <span class="meta">2018 Apr 19</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/29669944/" target="_blank" rel="noreferrer">Neutrophil subsets and their gene signature associate with vascular inflammation and coronary atherosclerosis in lupus.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 29669944</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">JCI insight</span>
+        <span class="meta">2018 Apr 19</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/29669944/" target="_blank" rel="noreferrer">Neutrophil subsets and their gene signature associate with vascular inflammation and coronary atherosclerosis in lupus.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 29669944</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">JCI insight</span>
+        <span class="meta">2018 Apr 19</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/29669944/" target="_blank" rel="noreferrer">Neutrophil subsets and their gene signature associate with vascular inflammation and coronary atherosclerosis in lupus.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 29669944</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">JCI insight</span>
+        <span class="meta">2018 Apr 19</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/29669944/" target="_blank" rel="noreferrer">Neutrophil subsets and their gene signature associate with vascular inflammation and coronary atherosclerosis in lupus.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 29669944</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">JCI insight</span>
+        <span class="meta">2018 Apr 19</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/29669944/" target="_blank" rel="noreferrer">Neutrophil subsets and their gene signature associate with vascular inflammation and coronary atherosclerosis in lupus.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 29669944</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">JCI insight</span>
+        <span class="meta">2018 Apr 19</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/29669944/" target="_blank" rel="noreferrer">Neutrophil subsets and their gene signature associate with vascular inflammation and coronary atherosclerosis in lupus.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 29669944</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">JCI insight</span>
+        <span class="meta">2018 Apr 19</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/29669944/" target="_blank" rel="noreferrer">Neutrophil subsets and their gene signature associate with vascular inflammation and coronary atherosclerosis in lupus.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 29669944</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">JCI insight</span>
+        <span class="meta">2018 Apr 19</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/29669944/" target="_blank" rel="noreferrer">Neutrophil subsets and their gene signature associate with vascular inflammation and coronary atherosclerosis in lupus.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 29669944</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">JCI insight</span>
+        <span class="meta">2018 Apr 19</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/29669944/" target="_blank" rel="noreferrer">Neutrophil subsets and their gene signature associate with vascular inflammation and coronary atherosclerosis in lupus.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 29669944</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">JCI insight</span>
+        <span class="meta">2018 Apr 19</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/29669944/" target="_blank" rel="noreferrer">Neutrophil subsets and their gene signature associate with vascular inflammation and coronary atherosclerosis in lupus.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 29669944</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">JCI insight</span>
+        <span class="meta">2018 Apr 19</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/25334031/" target="_blank" rel="noreferrer">ClinicalTrials.gov as a data source for semi-automated point-of-care trial eligibility screening.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 25334031</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">PloS one</span>
+        <span class="meta">2014</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/25334031/" target="_blank" rel="noreferrer">ClinicalTrials.gov as a data source for semi-automated point-of-care trial eligibility screening.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 25334031</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">PloS one</span>
+        <span class="meta">2014</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/25334031/" target="_blank" rel="noreferrer">ClinicalTrials.gov as a data source for semi-automated point-of-care trial eligibility screening.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 25334031</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">PloS one</span>
+        <span class="meta">2014</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/25334031/" target="_blank" rel="noreferrer">ClinicalTrials.gov as a data source for semi-automated point-of-care trial eligibility screening.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 25334031</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">PloS one</span>
+        <span class="meta">2014</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/25334031/" target="_blank" rel="noreferrer">ClinicalTrials.gov as a data source for semi-automated point-of-care trial eligibility screening.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 25334031</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">PloS one</span>
+        <span class="meta">2014</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/25334031/" target="_blank" rel="noreferrer">ClinicalTrials.gov as a data source for semi-automated point-of-care trial eligibility screening.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 25334031</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">PloS one</span>
+        <span class="meta">2014</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/25334031/" target="_blank" rel="noreferrer">ClinicalTrials.gov as a data source for semi-automated point-of-care trial eligibility screening.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 25334031</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">PloS one</span>
+        <span class="meta">2014</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/25334031/" target="_blank" rel="noreferrer">ClinicalTrials.gov as a data source for semi-automated point-of-care trial eligibility screening.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 25334031</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">PloS one</span>
+        <span class="meta">2014</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/25334031/" target="_blank" rel="noreferrer">ClinicalTrials.gov as a data source for semi-automated point-of-care trial eligibility screening.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 25334031</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">PloS one</span>
+        <span class="meta">2014</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/25334031/" target="_blank" rel="noreferrer">ClinicalTrials.gov as a data source for semi-automated point-of-care trial eligibility screening.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 25334031</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">PloS one</span>
+        <span class="meta">2014</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/25334031/" target="_blank" rel="noreferrer">ClinicalTrials.gov as a data source for semi-automated point-of-care trial eligibility screening.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 25334031</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">PloS one</span>
+        <span class="meta">2014</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/25334031/" target="_blank" rel="noreferrer">ClinicalTrials.gov as a data source for semi-automated point-of-care trial eligibility screening.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 25334031</span>
+        <span class="meta">Trial: <a href="trials/NCT00001372.html">NCT00001372</a></span>
+        <span class="meta">PloS one</span>
+        <span class="meta">2014</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/20131296/" target="_blank" rel="noreferrer">High-dose cyclophosphamide versus monthly intravenous cyclophosphamide for systemic lupus erythematosus: a prospective randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 20131296</span>
+        <span class="meta">Trial: <a href="trials/NCT00010400.html">NCT00010400</a></span>
+        <span class="meta">Arthritis and rheumatism</span>
+        <span class="meta">2010 May</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/20131296/" target="_blank" rel="noreferrer">High-dose cyclophosphamide versus monthly intravenous cyclophosphamide for systemic lupus erythematosus: a prospective randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 20131296</span>
+        <span class="meta">Trial: <a href="trials/NCT00010400.html">NCT00010400</a></span>
+        <span class="meta">Arthritis and rheumatism</span>
+        <span class="meta">2010 May</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/20131296/" target="_blank" rel="noreferrer">High-dose cyclophosphamide versus monthly intravenous cyclophosphamide for systemic lupus erythematosus: a prospective randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 20131296</span>
+        <span class="meta">Trial: <a href="trials/NCT00010400.html">NCT00010400</a></span>
+        <span class="meta">Arthritis and rheumatism</span>
+        <span class="meta">2010 May</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/20131296/" target="_blank" rel="noreferrer">High-dose cyclophosphamide versus monthly intravenous cyclophosphamide for systemic lupus erythematosus: a prospective randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 20131296</span>
+        <span class="meta">Trial: <a href="trials/NCT00010400.html">NCT00010400</a></span>
+        <span class="meta">Arthritis and rheumatism</span>
+        <span class="meta">2010 May</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/20131296/" target="_blank" rel="noreferrer">High-dose cyclophosphamide versus monthly intravenous cyclophosphamide for systemic lupus erythematosus: a prospective randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 20131296</span>
+        <span class="meta">Trial: <a href="trials/NCT00010400.html">NCT00010400</a></span>
+        <span class="meta">Arthritis and rheumatism</span>
+        <span class="meta">2010 May</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/20131296/" target="_blank" rel="noreferrer">High-dose cyclophosphamide versus monthly intravenous cyclophosphamide for systemic lupus erythematosus: a prospective randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 20131296</span>
+        <span class="meta">Trial: <a href="trials/NCT00010400.html">NCT00010400</a></span>
+        <span class="meta">Arthritis and rheumatism</span>
+        <span class="meta">2010 May</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/20131296/" target="_blank" rel="noreferrer">High-dose cyclophosphamide versus monthly intravenous cyclophosphamide for systemic lupus erythematosus: a prospective randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 20131296</span>
+        <span class="meta">Trial: <a href="trials/NCT00010400.html">NCT00010400</a></span>
+        <span class="meta">Arthritis and rheumatism</span>
+        <span class="meta">2010 May</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/20131296/" target="_blank" rel="noreferrer">High-dose cyclophosphamide versus monthly intravenous cyclophosphamide for systemic lupus erythematosus: a prospective randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 20131296</span>
+        <span class="meta">Trial: <a href="trials/NCT00010400.html">NCT00010400</a></span>
+        <span class="meta">Arthritis and rheumatism</span>
+        <span class="meta">2010 May</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/20131296/" target="_blank" rel="noreferrer">High-dose cyclophosphamide versus monthly intravenous cyclophosphamide for systemic lupus erythematosus: a prospective randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 20131296</span>
+        <span class="meta">Trial: <a href="trials/NCT00010400.html">NCT00010400</a></span>
+        <span class="meta">Arthritis and rheumatism</span>
+        <span class="meta">2010 May</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/20131296/" target="_blank" rel="noreferrer">High-dose cyclophosphamide versus monthly intravenous cyclophosphamide for systemic lupus erythematosus: a prospective randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 20131296</span>
+        <span class="meta">Trial: <a href="trials/NCT00010400.html">NCT00010400</a></span>
+        <span class="meta">Arthritis and rheumatism</span>
+        <span class="meta">2010 May</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/20131296/" target="_blank" rel="noreferrer">High-dose cyclophosphamide versus monthly intravenous cyclophosphamide for systemic lupus erythematosus: a prospective randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 20131296</span>
+        <span class="meta">Trial: <a href="trials/NCT00010400.html">NCT00010400</a></span>
+        <span class="meta">Arthritis and rheumatism</span>
+        <span class="meta">2010 May</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/20131296/" target="_blank" rel="noreferrer">High-dose cyclophosphamide versus monthly intravenous cyclophosphamide for systemic lupus erythematosus: a prospective randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 20131296</span>
+        <span class="meta">Trial: <a href="trials/NCT00010400.html">NCT00010400</a></span>
+        <span class="meta">Arthritis and rheumatism</span>
+        <span class="meta">2010 May</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/18195175/" target="_blank" rel="noreferrer">Utility of cardiac monitoring in fetuses at risk for congenital heart block: the PR Interval and Dexamethasone Evaluation (PRIDE) prospective study.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 18195175</span>
+        <span class="meta">Trial: <a href="trials/NCT00007358.html">NCT00007358</a></span>
+        <span class="meta">Circulation</span>
+        <span class="meta">2008 Jan 29</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/18195175/" target="_blank" rel="noreferrer">Utility of cardiac monitoring in fetuses at risk for congenital heart block: the PR Interval and Dexamethasone Evaluation (PRIDE) prospective study.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 18195175</span>
+        <span class="meta">Trial: <a href="trials/NCT00007358.html">NCT00007358</a></span>
+        <span class="meta">Circulation</span>
+        <span class="meta">2008 Jan 29</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/18195175/" target="_blank" rel="noreferrer">Utility of cardiac monitoring in fetuses at risk for congenital heart block: the PR Interval and Dexamethasone Evaluation (PRIDE) prospective study.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 18195175</span>
+        <span class="meta">Trial: <a href="trials/NCT00007358.html">NCT00007358</a></span>
+        <span class="meta">Circulation</span>
+        <span class="meta">2008 Jan 29</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/18195175/" target="_blank" rel="noreferrer">Utility of cardiac monitoring in fetuses at risk for congenital heart block: the PR Interval and Dexamethasone Evaluation (PRIDE) prospective study.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 18195175</span>
+        <span class="meta">Trial: <a href="trials/NCT00007358.html">NCT00007358</a></span>
+        <span class="meta">Circulation</span>
+        <span class="meta">2008 Jan 29</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/18195175/" target="_blank" rel="noreferrer">Utility of cardiac monitoring in fetuses at risk for congenital heart block: the PR Interval and Dexamethasone Evaluation (PRIDE) prospective study.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 18195175</span>
+        <span class="meta">Trial: <a href="trials/NCT00007358.html">NCT00007358</a></span>
+        <span class="meta">Circulation</span>
+        <span class="meta">2008 Jan 29</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/18195175/" target="_blank" rel="noreferrer">Utility of cardiac monitoring in fetuses at risk for congenital heart block: the PR Interval and Dexamethasone Evaluation (PRIDE) prospective study.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 18195175</span>
+        <span class="meta">Trial: <a href="trials/NCT00007358.html">NCT00007358</a></span>
+        <span class="meta">Circulation</span>
+        <span class="meta">2008 Jan 29</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/18195175/" target="_blank" rel="noreferrer">Utility of cardiac monitoring in fetuses at risk for congenital heart block: the PR Interval and Dexamethasone Evaluation (PRIDE) prospective study.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 18195175</span>
+        <span class="meta">Trial: <a href="trials/NCT00007358.html">NCT00007358</a></span>
+        <span class="meta">Circulation</span>
+        <span class="meta">2008 Jan 29</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/18195175/" target="_blank" rel="noreferrer">Utility of cardiac monitoring in fetuses at risk for congenital heart block: the PR Interval and Dexamethasone Evaluation (PRIDE) prospective study.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 18195175</span>
+        <span class="meta">Trial: <a href="trials/NCT00007358.html">NCT00007358</a></span>
+        <span class="meta">Circulation</span>
+        <span class="meta">2008 Jan 29</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/18195175/" target="_blank" rel="noreferrer">Utility of cardiac monitoring in fetuses at risk for congenital heart block: the PR Interval and Dexamethasone Evaluation (PRIDE) prospective study.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 18195175</span>
+        <span class="meta">Trial: <a href="trials/NCT00007358.html">NCT00007358</a></span>
+        <span class="meta">Circulation</span>
+        <span class="meta">2008 Jan 29</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/18195175/" target="_blank" rel="noreferrer">Utility of cardiac monitoring in fetuses at risk for congenital heart block: the PR Interval and Dexamethasone Evaluation (PRIDE) prospective study.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 18195175</span>
+        <span class="meta">Trial: <a href="trials/NCT00007358.html">NCT00007358</a></span>
+        <span class="meta">Circulation</span>
+        <span class="meta">2008 Jan 29</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/18195175/" target="_blank" rel="noreferrer">Utility of cardiac monitoring in fetuses at risk for congenital heart block: the PR Interval and Dexamethasone Evaluation (PRIDE) prospective study.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 18195175</span>
+        <span class="meta">Trial: <a href="trials/NCT00007358.html">NCT00007358</a></span>
+        <span class="meta">Circulation</span>
+        <span class="meta">2008 Jan 29</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/18195175/" target="_blank" rel="noreferrer">Utility of cardiac monitoring in fetuses at risk for congenital heart block: the PR Interval and Dexamethasone Evaluation (PRIDE) prospective study.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 18195175</span>
+        <span class="meta">Trial: <a href="trials/NCT00007358.html">NCT00007358</a></span>
+        <span class="meta">Circulation</span>
+        <span class="meta">2008 Jan 29</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/15968009/" target="_blank" rel="noreferrer">The effect of combined estrogen and progesterone hormone replacement therapy on disease activity in systemic lupus erythematosus: a randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 15968009</span>
+        <span class="meta">Trial: <a href="trials/NCT00000419.html">NCT00000419</a></span>
+        <span class="meta">Annals of internal medicine</span>
+        <span class="meta">2005 Jun 21</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/15968009/" target="_blank" rel="noreferrer">The effect of combined estrogen and progesterone hormone replacement therapy on disease activity in systemic lupus erythematosus: a randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 15968009</span>
+        <span class="meta">Trial: <a href="trials/NCT00000419.html">NCT00000419</a></span>
+        <span class="meta">Annals of internal medicine</span>
+        <span class="meta">2005 Jun 21</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/15968009/" target="_blank" rel="noreferrer">The effect of combined estrogen and progesterone hormone replacement therapy on disease activity in systemic lupus erythematosus: a randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 15968009</span>
+        <span class="meta">Trial: <a href="trials/NCT00000419.html">NCT00000419</a></span>
+        <span class="meta">Annals of internal medicine</span>
+        <span class="meta">2005 Jun 21</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/15968009/" target="_blank" rel="noreferrer">The effect of combined estrogen and progesterone hormone replacement therapy on disease activity in systemic lupus erythematosus: a randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 15968009</span>
+        <span class="meta">Trial: <a href="trials/NCT00000419.html">NCT00000419</a></span>
+        <span class="meta">Annals of internal medicine</span>
+        <span class="meta">2005 Jun 21</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/15968009/" target="_blank" rel="noreferrer">The effect of combined estrogen and progesterone hormone replacement therapy on disease activity in systemic lupus erythematosus: a randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 15968009</span>
+        <span class="meta">Trial: <a href="trials/NCT00000419.html">NCT00000419</a></span>
+        <span class="meta">Annals of internal medicine</span>
+        <span class="meta">2005 Jun 21</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/15968009/" target="_blank" rel="noreferrer">The effect of combined estrogen and progesterone hormone replacement therapy on disease activity in systemic lupus erythematosus: a randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 15968009</span>
+        <span class="meta">Trial: <a href="trials/NCT00000419.html">NCT00000419</a></span>
+        <span class="meta">Annals of internal medicine</span>
+        <span class="meta">2005 Jun 21</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/15968009/" target="_blank" rel="noreferrer">The effect of combined estrogen and progesterone hormone replacement therapy on disease activity in systemic lupus erythematosus: a randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 15968009</span>
+        <span class="meta">Trial: <a href="trials/NCT00000419.html">NCT00000419</a></span>
+        <span class="meta">Annals of internal medicine</span>
+        <span class="meta">2005 Jun 21</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/15968009/" target="_blank" rel="noreferrer">The effect of combined estrogen and progesterone hormone replacement therapy on disease activity in systemic lupus erythematosus: a randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 15968009</span>
+        <span class="meta">Trial: <a href="trials/NCT00000419.html">NCT00000419</a></span>
+        <span class="meta">Annals of internal medicine</span>
+        <span class="meta">2005 Jun 21</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/15968009/" target="_blank" rel="noreferrer">The effect of combined estrogen and progesterone hormone replacement therapy on disease activity in systemic lupus erythematosus: a randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 15968009</span>
+        <span class="meta">Trial: <a href="trials/NCT00000419.html">NCT00000419</a></span>
+        <span class="meta">Annals of internal medicine</span>
+        <span class="meta">2005 Jun 21</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/15968009/" target="_blank" rel="noreferrer">The effect of combined estrogen and progesterone hormone replacement therapy on disease activity in systemic lupus erythematosus: a randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 15968009</span>
+        <span class="meta">Trial: <a href="trials/NCT00000419.html">NCT00000419</a></span>
+        <span class="meta">Annals of internal medicine</span>
+        <span class="meta">2005 Jun 21</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/15968009/" target="_blank" rel="noreferrer">The effect of combined estrogen and progesterone hormone replacement therapy on disease activity in systemic lupus erythematosus: a randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 15968009</span>
+        <span class="meta">Trial: <a href="trials/NCT00000419.html">NCT00000419</a></span>
+        <span class="meta">Annals of internal medicine</span>
+        <span class="meta">2005 Jun 21</span>
+      </div>
+    </article>
+<article class="trial-card">
+      <h3><a href="https://pubmed.ncbi.nlm.nih.gov/15968009/" target="_blank" rel="noreferrer">The effect of combined estrogen and progesterone hormone replacement therapy on disease activity in systemic lupus erythematosus: a randomized trial.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">PMID 15968009</span>
+        <span class="meta">Trial: <a href="trials/NCT00000419.html">NCT00000419</a></span>
+        <span class="meta">Annals of internal medicine</span>
+        <span class="meta">2005 Jun 21</span>
+      </div>
+    </article></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

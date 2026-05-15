@@ -1,0 +1,343 @@
+{
+  "changed_trials": 31,
+  "countries_count": 85,
+  "current_research_trials": 472,
+  "historical_trials": 728,
+  "intervention_type_counts": [
+    [
+      "drug",
+      723
+    ],
+    [
+      "biological",
+      248
+    ],
+    [
+      "other",
+      205
+    ],
+    [
+      "Unknown",
+      175
+    ],
+    [
+      "behavioral",
+      70
+    ],
+    [
+      "diagnostic_test",
+      63
+    ],
+    [
+      "procedure",
+      40
+    ],
+    [
+      "device",
+      34
+    ],
+    [
+      "dietary_supplement",
+      18
+    ],
+    [
+      "genetic",
+      8
+    ],
+    [
+      "combination_product",
+      6
+    ],
+    [
+      "radiation",
+      5
+    ]
+  ],
+  "interventions_count": 1471,
+  "name": "Lupus Research Radar",
+  "new_trials": 3,
+  "phase_counts": [
+    [
+      "N/A",
+      606
+    ],
+    [
+      "Phase 2",
+      232
+    ],
+    [
+      "Phase 1",
+      232
+    ],
+    [
+      "Phase 3",
+      136
+    ],
+    [
+      "Phase 1, Phase 2",
+      79
+    ],
+    [
+      "Phase 4",
+      77
+    ],
+    [
+      "Early Phase 1",
+      51
+    ],
+    [
+      "Phase 2, Phase 3",
+      23
+    ]
+  ],
+  "recruiting_or_opening_trials": 410,
+  "region_counts": [
+    [
+      "North America",
+      562
+    ],
+    [
+      "East Asia",
+      442
+    ],
+    [
+      "Europe",
+      393
+    ],
+    [
+      "Other / Global",
+      182
+    ],
+    [
+      "Unknown",
+      174
+    ],
+    [
+      "Latin America",
+      167
+    ],
+    [
+      "Southeast Asia",
+      99
+    ],
+    [
+      "Oceania",
+      68
+    ],
+    [
+      "Middle East / Africa",
+      62
+    ],
+    [
+      "Middle East",
+      49
+    ],
+    [
+      "South Asia",
+      42
+    ],
+    [
+      "Africa",
+      38
+    ]
+  ],
+  "removed_trials": 0,
+  "slug": "lupus",
+  "source": "ClinicalTrials.gov",
+  "source_data_timestamp": null,
+  "status_counts": [
+    [
+      "COMPLETED",
+      556
+    ],
+    [
+      "RECRUITING",
+      282
+    ],
+    [
+      "UNKNOWN",
+      236
+    ],
+    [
+      "NOT_YET_RECRUITING",
+      115
+    ],
+    [
+      "TERMINATED",
+      112
+    ],
+    [
+      "ACTIVE_NOT_RECRUITING",
+      62
+    ],
+    [
+      "WITHDRAWN",
+      53
+    ],
+    [
+      "ENROLLING_BY_INVITATION",
+      13
+    ],
+    [
+      "SUSPENDED",
+      4
+    ],
+    [
+      "NO_LONGER_AVAILABLE",
+      3
+    ]
+  ],
+  "top_countries": [
+    [
+      "United States",
+      536
+    ],
+    [
+      "China",
+      320
+    ],
+    [
+      "France",
+      179
+    ],
+    [
+      "Unknown",
+      174
+    ],
+    [
+      "Spain",
+      160
+    ],
+    [
+      "Germany",
+      136
+    ],
+    [
+      "Mexico",
+      123
+    ],
+    [
+      "Poland",
+      120
+    ],
+    [
+      "Argentina",
+      109
+    ],
+    [
+      "Brazil",
+      105
+    ],
+    [
+      "Canada",
+      103
+    ],
+    [
+      "Taiwan",
+      103
+    ]
+  ],
+  "top_interventions": [
+    [
+      "Placebo",
+      253
+    ],
+    [
+      "Unknown",
+      176
+    ],
+    [
+      "Cyclophosphamide",
+      40
+    ],
+    [
+      "Rituximab",
+      24
+    ],
+    [
+      "Belimumab",
+      21
+    ],
+    [
+      "Anifrolumab",
+      21
+    ],
+    [
+      "Mycophenolate Mofetil",
+      19
+    ],
+    [
+      "Fludarabine",
+      19
+    ],
+    [
+      "Prednisone",
+      18
+    ],
+    [
+      "Methylprednisolone",
+      17
+    ],
+    [
+      "Azathioprine",
+      15
+    ],
+    [
+      "Standard of care",
+      12
+    ]
+  ],
+  "top_sponsors": [
+    [
+      "Assiut University",
+      57
+    ],
+    [
+      "AstraZeneca",
+      37
+    ],
+    [
+      "GlaxoSmithKline",
+      31
+    ],
+    [
+      "Assistance Publique - Hôpitaux de Paris",
+      22
+    ],
+    [
+      "Sohag University",
+      22
+    ],
+    [
+      "Amgen",
+      20
+    ],
+    [
+      "Bristol-Myers Squibb",
+      18
+    ],
+    [
+      "Novartis Pharmaceuticals",
+      18
+    ],
+    [
+      "National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS)",
+      16
+    ],
+    [
+      "National Institute of Allergy and Infectious Diseases (NIAID)",
+      16
+    ],
+    [
+      "RenJi Hospital",
+      16
+    ],
+    [
+      "NYU Langone Health",
+      14
+    ]
+  ],
+  "total_trials": 1436,
+  "unclear_trials": 236,
+  "updated": "2026-05-15"
+}

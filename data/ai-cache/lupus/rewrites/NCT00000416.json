@@ -1,0 +1,32 @@
+{
+  "_meta": {
+    "cache_key": "NCT00000416:2017-07-26",
+    "model": "deepseek-v4-pro",
+    "source": "deepseek_chat_completions_api",
+    "trial_id": "NCT00000416"
+  },
+  "may_be_looking_for": [
+    "People who were employed full-time or part-time",
+    "People living in selected communities in eastern Massachusetts",
+    "People with a rheumatic condition such as rheumatoid arthritis, osteoarthritis of the knee, ankylosing spondylitis, or systemic lupus erythematosus"
+  ],
+  "may_exclude_people_who": [
+    "People who planned to move out of the area",
+    "People who planned to have joint replacement surgery within the next 6 months",
+    "People who planned to retire or go on disability within the next 2 years"
+  ],
+  "patient_summary": "This study tested whether vocational rehabilitation (VR) services could help people with arthritis keep their jobs. Participants were employed and lived in eastern Massachusetts. They received either job retention services from VR counselors or educational materials about employment resources. The study compared the two groups to see if VR services prevented job loss. This study is completed.",
+  "patient_title": "Job Retention Support for People with Arthritis",
+  "questions_to_ask_clinician": [
+    "What job retention support options might be available for people with arthritis?",
+    "How do vocational rehabilitation counselors help with job modifications?",
+    "What factors might affect a person's ability to keep working with a person's condition?"
+  ],
+  "source_grounding": [
+    "Title, brief summary, conditions, eligibility excerpt, interventions, and status."
+  ],
+  "uncertainty_notes": [
+    "The study was completed, but results are not included here. It was limited to a specific geographic area and certain rheumatic conditions, so findings may not apply broadly."
+  ],
+  "what_researchers_are_studying": "Researchers were studying whether vocational rehabilitation services improve job retention for employed people with rheumatic disorders."
+}

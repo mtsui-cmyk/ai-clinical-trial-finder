@@ -1,0 +1,64 @@
+{
+  "protocolSection": {
+    "identificationModule": {
+      "nctId": "NCT00000001",
+      "briefTitle": "A Phase 2 Study of Examplemab in Lupus Nephritis",
+      "officialTitle": "A Randomized Phase 2 Study of Examplemab in Lupus Nephritis"
+    },
+    "statusModule": {
+      "overallStatus": "RECRUITING",
+      "startDateStruct": {
+        "date": "2025-01-01"
+      },
+      "lastUpdatePostDateStruct": {
+        "date": "2026-05-01"
+      }
+    },
+    "sponsorCollaboratorsModule": {
+      "leadSponsor": {
+        "name": "Example Bio",
+        "class": "INDUSTRY"
+      }
+    },
+    "conditionsModule": {
+      "conditions": [
+        "Lupus Nephritis"
+      ]
+    },
+    "designModule": {
+      "studyType": "INTERVENTIONAL",
+      "phases": [
+        "PHASE2"
+      ]
+    },
+    "armsInterventionsModule": {
+      "interventions": [
+        {
+          "type": "BIOLOGICAL",
+          "name": "Examplemab",
+          "otherNames": [
+            "EXM-101"
+          ]
+        }
+      ]
+    },
+    "contactsLocationsModule": {
+      "locations": [
+        {
+          "country": "Spain"
+        },
+        {
+          "country": "United Kingdom"
+        }
+      ]
+    },
+    "oversightModule": {
+      "isFdaRegulatedDrug": false,
+      "isFdaRegulatedDevice": false
+    },
+    "descriptionModule": {
+      "briefSummary": "This study evaluates Examplemab in lupus nephritis."
+    }
+  }
+}
+

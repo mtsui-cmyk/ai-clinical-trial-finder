@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weekly Brief - Lupus Research Radar</title>
+  <style>
+    :root {
+      --ink: #24211d;
+      --muted: #6f6a60;
+      --line: #d8d2c5;
+      --bg: #f6f3ed;
+      --surface: #fffdf8;
+      --accent: #6d3f5f;
+      --accent-soft: #f3edf2;
+      --warn: #8a5a12;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+    header { background: var(--surface); border-bottom: 1px solid var(--line); }
+    section { background: var(--surface); border-bottom: 1px solid var(--line); }
+    section:nth-child(even) { background: #fbf8f1; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 24px; }
+    .app-nav { border-bottom: 1px solid var(--line); background: rgba(255,255,255,.96); position: sticky; top: 0; z-index: 5; }
+    .app-nav .wrap { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding-top: 12px; padding-bottom: 12px; }
+    .brand { color: var(--ink); font-weight: 800; text-decoration: none; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+    .nav-links a { color: var(--muted); font-size: 13px; font-weight: 750; text-decoration: none; padding: 7px 8px; border-radius: 6px; }
+    .nav-links a:hover { background: var(--accent-soft); color: var(--accent); }
+    .boundary { color: var(--muted); font-size: 13px; margin-top: 10px; }
+    .eyebrow { color: var(--accent); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0; }
+    h1 { margin: 8px 0 10px; font-size: clamp(28px, 4vw, 44px); line-height: 1.08; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 22px; letter-spacing: 0; }
+    h3 { margin: 18px 0 8px; font-size: 17px; letter-spacing: 0; }
+    p { color: var(--muted); }
+    a { color: #5c3b72; text-decoration-thickness: 1px; }
+    .plain { color: #3f3a34; max-width: 860px; }
+    .notice { border-left: 4px solid var(--warn); background: #fff8ea; padding: 14px 16px; color: #46340f; margin-top: 16px; }
+    .ai-note { border-left: 4px solid #77506f; background: #f5edf2; padding: 14px 16px; color: #4e3448; margin-top: 16px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .button { display: inline-block; border: 1px solid var(--line); background: #fffdf8; color: var(--ink); padding: 10px 12px; border-radius: 6px; text-decoration: none; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .box { border: 1px solid var(--line); background: #fbf8f1; padding: 13px; min-height: 86px; }
+    .box span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+    .box strong { display: block; overflow-wrap: anywhere; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; vertical-align: top; padding: 10px; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-size: 12px; text-transform: uppercase; background: #eee8dc; letter-spacing: 0; }
+    ul { padding-left: 20px; color: #3f3a34; }
+    li { margin: 6px 0; }
+    .trial-list { display: grid; gap: 12px; }
+    .trial-card { border: 1px solid var(--line); background: #fffdf8; padding: 15px; border-radius: 8px; }
+    .trial-card h3 { margin: 0 0 8px; font-size: 18px; line-height: 1.28; letter-spacing: 0; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+    .meta { color: var(--muted); font-size: 13px; }
+    .pill { display: inline-block; border: 1px solid var(--line); background: #fffdf8; color: var(--muted); border-radius: 4px; padding: 4px 8px; margin: 2px 4px 2px 0; font-size: 13px; }
+    .status-badge { display: inline-block; padding: 5px 8px; background: var(--accent-soft); color: var(--accent); border: 1px solid #d4c3d1; border-radius: 4px; font-size: 13px; font-weight: 700; }
+    .topic-layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 22px; align-items: start; }
+    .side-panel { border: 1px solid var(--line); background: #fffdf8; border-radius: 8px; padding: 15px; }
+    .compact-section { padding-top: 18px; padding-bottom: 18px; }
+    @media (max-width: 760px) {
+      .wrap { padding: 18px; }
+      .app-nav .wrap { display: block; }
+      .nav-links { justify-content: flex-start; margin-top: 8px; }
+      .grid { grid-template-columns: 1fr; }
+      .topic-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+  <style>
+    @media print {
+      .actions { display: none; }
+      body { background: #fffdf8; }
+      section, header { border-bottom: 1px solid #bbb; }
+      .trial-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">Print-friendly public-data brief</div>
+      <h1>Lupus Research Radar Weekly Brief</h1>
+      <p class="plain">A shareable summary for NGOs, patient advocates, and research volunteers. It summarizes public registry data only and does not recommend trials, drugs, devices, or treatments.</p>
+      <div class="actions">
+        <a class="button" href="index.html">Back to radar</a>
+        <a class="button" href="javascript:window.print()">Print / save PDF</a>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section>
+      <div class="wrap">
+        <h2>Snapshot</h2>
+        <div class="grid">
+          <div class="box"><span>Total public records</span><strong>1436</strong></div>
+          <div class="box"><span>Current/open</span><strong>472</strong></div>
+          <div class="box"><span>Recruiting/opening</span><strong>410</strong></div>
+          <div class="box"><span>AI explained</span><strong>15</strong></div>
+          <div class="box"><span>Countries</span><strong>85</strong></div>
+          <div class="box"><span>Interventions</span><strong>1471</strong></div>
+        </div>
+      </div>
+    </section>
+    <section><div class="wrap">
+      <h2>What Changed This Week</h2>
+      <p class="plain">This run found 3 new public records, 31 records with tracked field changes, and 0 records no longer present in the local disease-scoped result set.</p>
+      <div class="grid">
+        <div class="box"><span>New records</span><strong>3</strong></div>
+        <div class="box"><span>Changed records</span><strong>31</strong></div>
+        <div class="box"><span>Removed records</span><strong>Not listed</strong></div>
+      </div>
+      <p class="plain">Interpret this as public-data monitoring only. A registry update may be administrative, operational, or clinical; this page does not judge importance.</p>
+      <h3>Most changed fields</h3><table><tbody><tr><td>last_update_posted</td><td style="text-align:right">31</td></tr><tr><td>status</td><td style="text-align:right">3</td></tr><tr><td>countries</td><td style="text-align:right">3</td></tr><tr><td>interventions</td><td style="text-align:right">2</td></tr></tbody></table>
+    </div></section>
+    <section>
+      <div class="wrap">
+        <h2>Build-Time AI Brief Workspace</h2>
+        <p class="plain">The repo writes a source-grounded briefing prompt pack, but the AI brief is generated only when an operator runs the AI command. The static site does not call an LLM at page view time.</p>
+        <div class="grid">
+          <div class="box"><span>AI-explained current/open</span><strong>6 / 472</strong></div>
+          <div class="box"><span>Current/open prompt queue</span><strong>466</strong></div>
+          <div class="box"><span>All AI-explained records</span><strong>15</strong></div>
+        </div>
+        <div class="ai-note"><strong>Cost and safety boundary:</strong> generate the AI brief on demand, after reviewing public-data changes. The brief may explain research signals and draft advocate questions, but it must not recommend trials, rank therapies, or decide eligibility.</div>
+        <div class="actions">
+          <a class="button" href="../reports/ai-coverage.md">AI coverage report</a>
+          <a class="button" href="../data/ai-cache/lupus/weekly_brief_prompt.json">Weekly AI prompt</a>
+          <a class="button" href="../data/ai-cache/lupus/rewrite_prompts_current_open.jsonl">Current/open AI prompt queue</a>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="wrap">
+        <h2>Current Research To Review</h2>
+        <p class="plain">Showing up to 12 current/open records, sorted for patient-facing review. Verify all details in source records.</p>
+        <div class="trial-list"><article class="trial-card">
+      <h3><a href="trials/NCT06557265.html">A Phase 1/2 Study of NKX019 in Subjects With Autoimmune Disease (Ntrust-1)</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT06557265</span>
+        <span class="meta">Phase 1, Phase 2</span>
+        <span class="meta">Updated: 2026-05-14</span>
+        <span class="meta">Sponsor: Nkarta, Inc.</span>
+      </div>
+      <div><span class="pill">Fludarabine, Cyclophosphamide</span><span class="pill">NKX019</span></div>
+      <div><span class="pill">Puerto Rico</span><span class="pill">United States</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="trials/NCT06948110.html">Deciphering the Genetic Architecture of Autoimmune Diseases</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT06948110</span>
+        <span class="meta">No standard drug phase listed</span>
+        <span class="meta">Updated: 2026-05-14</span>
+        <span class="meta">Sponsor: National Human Genome Research Institute (NHGRI)</span>
+      </div>
+      <div><span class="pill">Intervention not listed</span></div>
+      <div><span class="pill">Peru</span><span class="pill">United States</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="trials/NCT07409181.html">A Study to Test Whether Different Doses of BI 3000202 Help People With Systemic Lupus Erythematosus (SLE)</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT07409181</span>
+        <span class="meta">Phase 2</span>
+        <span class="meta">Updated: 2026-05-14</span>
+        <span class="meta">Sponsor: Boehringer Ingelheim</span>
+      </div>
+      <div><span class="pill">BI 3000202</span><span class="pill">Placebo</span></div>
+      <div><span class="pill">Argentina</span><span class="pill">Australia</span><span class="pill">Brazil</span><span class="pill">Bulgaria</span><span class="pill">China</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="trials/NCT07586267.html">CD19/BCMA UCAR-T for B Cell-Related Autoimmune Disease</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT07586267</span>
+        <span class="meta">Early Phase 1</span>
+        <span class="meta">Updated: 2026-05-14</span>
+        <span class="meta">Sponsor: The Children&#x27;s Hospital of Zhejiang University School of Medicine</span>
+      </div>
+      <div><span class="pill">QT-219CX</span></div>
+      <div><span class="pill">China</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="trials/NCT03816345.html">Testing an Immunotherapy Anti-cancer Drug, Nivolumab, for Advanced Cancers in Patients With Autoimmune Disorders, AIM-NIVO</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT03816345</span>
+        <span class="meta">Phase 1</span>
+        <span class="meta">Updated: 2026-05-13</span>
+        <span class="meta">Sponsor: National Cancer Institute (NCI)</span>
+      </div>
+      <div><span class="pill">Biospecimen Collection</span><span class="pill">Cabozantinib</span><span class="pill">Fluoropyrimidine</span><span class="pill">Ipilimumab</span><span class="pill">Nivolumab</span></div>
+      <div><span class="pill">Canada</span><span class="pill">United States</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="trials/NCT06673043.html">Anifrolumab Real-world Treatment Outcomes in Systemic Lupus Erythematosus</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT06673043</span>
+        <span class="meta">No standard drug phase listed</span>
+        <span class="meta">Updated: 2026-05-13</span>
+        <span class="meta">Sponsor: AstraZeneca</span>
+      </div>
+      <div><span class="pill">Anifrolumab</span></div>
+      <div><span class="pill">Poland</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="trials/NCT07043153.html">AGR+PNI as Predictors of Systemic Lupus Erythematosus Disease Activity</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT07043153</span>
+        <span class="meta">No standard drug phase listed</span>
+        <span class="meta">Updated: 2026-05-13</span>
+        <span class="meta">Sponsor: Sohag University</span>
+      </div>
+      <div><span class="pill">Albumin to globulin ratio and prognostic nutritional index model</span></div>
+      <div><span class="pill">Egypt</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="trials/NCT06594068.html">Prospective Registry Investigating Maternal, Infant, and Lactation Outcomes in Anifrolumab Users</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT06594068</span>
+        <span class="meta">Phase 4</span>
+        <span class="meta">Updated: 2026-05-12</span>
+        <span class="meta">Sponsor: AstraZeneca</span>
+      </div>
+      <div><span class="pill">Anifrolumab</span></div>
+      <div><span class="pill">United States</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="trials/NCT06897930.html">A Study to Investigate the Safety, Tolerability, and Efficacy of AZD0120 in Adults With Refractory SLE</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT06897930</span>
+        <span class="meta">Phase 1, Phase 2</span>
+        <span class="meta">Updated: 2026-05-12</span>
+        <span class="meta">Sponsor: AstraZeneca</span>
+      </div>
+      <div><span class="pill">AZD0120</span><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span></div>
+      <div><span class="pill">Australia</span><span class="pill">Canada</span><span class="pill">United States</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="trials/NCT06977724.html">A Study to Assess Adverse Events, How the Drug Moves Through the Body and Effectiveness of Intravenous Infusions of ABBV-319 in Adult Participants With Systemic Lupus Erythematosus (SLE) and Sjogren&#x27;s Disease (SjD)</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT06977724</span>
+        <span class="meta">Phase 1</span>
+        <span class="meta">Updated: 2026-05-12</span>
+        <span class="meta">Sponsor: AbbVie</span>
+      </div>
+      <div><span class="pill">ABBV-319</span></div>
+      <div><span class="pill">Netherlands</span><span class="pill">United States</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="trials/NCT07424261.html">NIS to Examine Disease Activity in SLE Patients Treated With Subcutaneous Anifrolumab in Routine Care</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT07424261</span>
+        <span class="meta">No standard drug phase listed</span>
+        <span class="meta">Updated: 2026-05-12</span>
+        <span class="meta">Sponsor: AstraZeneca</span>
+      </div>
+      <div><span class="pill">Intervention not listed</span></div>
+      <div><span class="pill">Germany</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="trials/NCT05835986.html">A First-in-Human Study to Investigate the Safety, Tolerability, Pharmacokinetics and Pharmacodynamics of RO7507062 in Participants With Systemic Lupus Erythematosus</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT05835986</span>
+        <span class="meta">Phase 1</span>
+        <span class="meta">Updated: 2026-05-11</span>
+        <span class="meta">Sponsor: Hoffmann-La Roche</span>
+      </div>
+      <div><span class="pill">RO7507062</span><span class="pill">Tocilizumab</span></div>
+      <div><span class="pill">Colombia</span><span class="pill">France</span><span class="pill">Germany</span><span class="pill">Malaysia</span><span class="pill">Mexico</span></div>
+    </article></div>
+      </div>
+    </section>
+    <section>
+      <div class="wrap">
+        <h2>Top Landscape Signals</h2>
+        <div class="grid">
+          <div><h3>Top interventions</h3><table><tbody><tr><td>Placebo</td><td style="text-align:right">253</td></tr><tr><td>Unknown</td><td style="text-align:right">176</td></tr><tr><td>Cyclophosphamide</td><td style="text-align:right">40</td></tr><tr><td>Rituximab</td><td style="text-align:right">24</td></tr><tr><td>Belimumab</td><td style="text-align:right">21</td></tr><tr><td>Anifrolumab</td><td style="text-align:right">21</td></tr><tr><td>Mycophenolate Mofetil</td><td style="text-align:right">19</td></tr><tr><td>Fludarabine</td><td style="text-align:right">19</td></tr><tr><td>Prednisone</td><td style="text-align:right">18</td></tr><tr><td>Methylprednisolone</td><td style="text-align:right">17</td></tr><tr><td>Azathioprine</td><td style="text-align:right">15</td></tr><tr><td>Standard of care</td><td style="text-align:right">12</td></tr></tbody></table></div>
+          <div><h3>Top sponsors</h3><table><tbody><tr><td>Assiut University</td><td style="text-align:right">57</td></tr><tr><td>AstraZeneca</td><td style="text-align:right">37</td></tr><tr><td>GlaxoSmithKline</td><td style="text-align:right">31</td></tr><tr><td>Assistance Publique - Hôpitaux de Paris</td><td style="text-align:right">22</td></tr><tr><td>Sohag University</td><td style="text-align:right">22</td></tr><tr><td>Amgen</td><td style="text-align:right">20</td></tr><tr><td>Bristol-Myers Squibb</td><td style="text-align:right">18</td></tr><tr><td>Novartis Pharmaceuticals</td><td style="text-align:right">18</td></tr><tr><td>National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS)</td><td style="text-align:right">16</td></tr><tr><td>National Institute of Allergy and Infectious Diseases (NIAID)</td><td style="text-align:right">16</td></tr><tr><td>RenJi Hospital</td><td style="text-align:right">16</td></tr><tr><td>NYU Langone Health</td><td style="text-align:right">14</td></tr></tbody></table></div>
+          <div><h3>Top countries</h3><table><tbody><tr><td>United States</td><td style="text-align:right">536</td></tr><tr><td>China</td><td style="text-align:right">320</td></tr><tr><td>France</td><td style="text-align:right">179</td></tr><tr><td>Unknown</td><td style="text-align:right">174</td></tr><tr><td>Spain</td><td style="text-align:right">160</td></tr><tr><td>Germany</td><td style="text-align:right">136</td></tr><tr><td>Mexico</td><td style="text-align:right">123</td></tr><tr><td>Poland</td><td style="text-align:right">120</td></tr><tr><td>Argentina</td><td style="text-align:right">109</td></tr><tr><td>Brazil</td><td style="text-align:right">105</td></tr><tr><td>Canada</td><td style="text-align:right">103</td></tr><tr><td>Taiwan</td><td style="text-align:right">103</td></tr></tbody></table></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

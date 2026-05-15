@@ -1,0 +1,50 @@
+{
+  "_meta": {
+    "cache_key": "NCT07405970:2026-05-05",
+    "model": "deepseek-v4-flash",
+    "source": "deepseek_chat_completions_api",
+    "trial_id": "NCT07405970"
+  },
+  "may_be_looking_for": [
+    "Adults aged 18 to 80",
+    "A diagnosis of systemic lupus erythematosus (SLE) according to specific criteria",
+    "Positive antinuclear antibodies (ANA) or anti-dsDNA",
+    "High disease activity as measured by a SLEDAI-2000 score of 8 or higher",
+    "On a stable dose of one or more standard SLE treatments before starting the study",
+    "Willing and able to provide written consent and follow the study protocol"
+  ],
+  "may_exclude_people_who": [
+    "Have insufficient organ function",
+    "Received rituximab or any B-cell depleting drug within 9 months before the study",
+    "Have a CD4+ T lymphocyte count below 200 cells/μL",
+    "Received cyclophosphamide within 8 weeks before the study",
+    "Received certain other medications like calcineurin inhibitors recently"
+  ],
+  "patient_summary": "This study tests a new drug called MIL62 against a placebo to see if it helps people with systemic lupus erythematosus (SLE). The study is currently recruiting participants in China.",
+  "patient_title": "A Study of MIL62 for Systemic Lupus Erythematosus (SLE)",
+  "questions_to_ask_clinician": [
+    "Does my disease activity meet the required SLEDAI-2000 score?",
+    "Have I taken any B-cell depleting drugs like rituximab in the past 9 months?",
+    "What is my CD4+ T lymphocyte count?",
+    "Do I have sufficient organ function for this study?",
+    "Am I on a stable dose of standard SLE treatments?",
+    "Have I taken cyclophosphamide or calcineurin inhibitors recently?"
+  ],
+  "source_grounding": [
+    "brief_summary",
+    "conditions",
+    "countries",
+    "eligibility_excerpt",
+    "interventions",
+    "phase",
+    "status",
+    "title"
+  ],
+  "uncertainty_notes": [
+    "This is a Phase 3 clinical trial, meaning the drug is being tested in a larger group of people to confirm its study outcomes and monitor side effects.",
+    "Participants will be randomly assigned to receive either MIL62 or a placebo.",
+    "The results of this study are not yet known, and there is no guarantee that MIL62 will be associated with the study outcome or safe.",
+    "Participation is voluntary, and you can withdraw at any time."
+  ],
+  "what_researchers_are_studying": "Researchers are studying whether MIL62 is associated with the study outcome and safe for treating systemic lupus erythematosus (SLE) compared to a placebo. This is a Phase 3 trial, which is the final stage of testing before potential approval."
+}

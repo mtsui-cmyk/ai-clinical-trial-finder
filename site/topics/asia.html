@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Asia-Pacific activity - Lupus Research Radar</title>
+  <style>
+    :root {
+      --ink: #24211d;
+      --muted: #6f6a60;
+      --line: #d8d2c5;
+      --bg: #f6f3ed;
+      --surface: #fffdf8;
+      --accent: #6d3f5f;
+      --accent-soft: #f3edf2;
+      --warn: #8a5a12;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+    header { background: var(--surface); border-bottom: 1px solid var(--line); }
+    section { background: var(--surface); border-bottom: 1px solid var(--line); }
+    section:nth-child(even) { background: #fbf8f1; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 24px; }
+    .app-nav { border-bottom: 1px solid var(--line); background: rgba(255,255,255,.96); position: sticky; top: 0; z-index: 5; }
+    .app-nav .wrap { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding-top: 12px; padding-bottom: 12px; }
+    .brand { color: var(--ink); font-weight: 800; text-decoration: none; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+    .nav-links a { color: var(--muted); font-size: 13px; font-weight: 750; text-decoration: none; padding: 7px 8px; border-radius: 6px; }
+    .nav-links a:hover { background: var(--accent-soft); color: var(--accent); }
+    .boundary { color: var(--muted); font-size: 13px; margin-top: 10px; }
+    .eyebrow { color: var(--accent); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0; }
+    h1 { margin: 8px 0 10px; font-size: clamp(28px, 4vw, 44px); line-height: 1.08; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 22px; letter-spacing: 0; }
+    h3 { margin: 18px 0 8px; font-size: 17px; letter-spacing: 0; }
+    p { color: var(--muted); }
+    a { color: #5c3b72; text-decoration-thickness: 1px; }
+    .plain { color: #3f3a34; max-width: 860px; }
+    .notice { border-left: 4px solid var(--warn); background: #fff8ea; padding: 14px 16px; color: #46340f; margin-top: 16px; }
+    .ai-note { border-left: 4px solid #77506f; background: #f5edf2; padding: 14px 16px; color: #4e3448; margin-top: 16px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .button { display: inline-block; border: 1px solid var(--line); background: #fffdf8; color: var(--ink); padding: 10px 12px; border-radius: 6px; text-decoration: none; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .box { border: 1px solid var(--line); background: #fbf8f1; padding: 13px; min-height: 86px; }
+    .box span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+    .box strong { display: block; overflow-wrap: anywhere; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; vertical-align: top; padding: 10px; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-size: 12px; text-transform: uppercase; background: #eee8dc; letter-spacing: 0; }
+    ul { padding-left: 20px; color: #3f3a34; }
+    li { margin: 6px 0; }
+    .trial-list { display: grid; gap: 12px; }
+    .trial-card { border: 1px solid var(--line); background: #fffdf8; padding: 15px; border-radius: 8px; }
+    .trial-card h3 { margin: 0 0 8px; font-size: 18px; line-height: 1.28; letter-spacing: 0; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+    .meta { color: var(--muted); font-size: 13px; }
+    .pill { display: inline-block; border: 1px solid var(--line); background: #fffdf8; color: var(--muted); border-radius: 4px; padding: 4px 8px; margin: 2px 4px 2px 0; font-size: 13px; }
+    .status-badge { display: inline-block; padding: 5px 8px; background: var(--accent-soft); color: var(--accent); border: 1px solid #d4c3d1; border-radius: 4px; font-size: 13px; font-weight: 700; }
+    .topic-layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 22px; align-items: start; }
+    .side-panel { border: 1px solid var(--line); background: #fffdf8; border-radius: 8px; padding: 15px; }
+    .compact-section { padding-top: 18px; padding-bottom: 18px; }
+    @media (max-width: 760px) {
+      .wrap { padding: 18px; }
+      .app-nav .wrap { display: block; }
+      .nav-links { justify-content: flex-start; margin-top: 8px; }
+      .grid { grid-template-columns: 1fr; }
+      .topic-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="wrap">
+      <a class="brand" href="../index.html">Lupus Research Radar</a>
+      <div class="nav-links">
+        <a href="../finder.html">Find</a>
+        <a href="../explorer.html">Learn</a>
+        <a href="../changes.html">Updates</a>
+      </div>
+    </div>
+  </nav>
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">Research area</div>
+      <h1>Asia-Pacific activity</h1>
+      <p class="plain">This area is a geographic view of public registry records with Asia-Pacific countries or regions listed. It helps advocacy groups see where public research activity is appearing.</p>
+      <div class="boundary">Public data only. Not medical advice.</div>
+    </div>
+  </header>
+  <main>
+    <section>
+      <div class="wrap topic-layout">
+        <div>
+          <div class="compact-section">
+            <h2>About this area</h2>
+            <p class="plain">Research sites and sponsors across East Asia, Southeast Asia, South Asia, and Oceania.</p>
+            <h3>Common terms</h3>
+            <div><span class="pill">site country</span><span class="pill">sponsor</span><span class="pill">recruitment status</span><span class="pill">region</span></div>
+          </div>
+          <div class="compact-section">
+            <h2>Open records</h2>
+            <p class="plain">Showing up to 8 current/open public records.</p>
+            <div class="trial-list"><article class="trial-card">
+      <h3><a href="../trials/NCT07409181.html">A Study to Test Whether Different Doses of BI 3000202 Help People With Systemic Lupus Erythematosus (SLE)</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT07409181</span>
+        <span class="meta">Phase 2</span>
+        <span class="meta">Updated: 2026-05-14</span>
+        <span class="meta">Sponsor: Boehringer Ingelheim</span>
+      </div>
+      <div><span class="pill">BI 3000202</span><span class="pill">Placebo</span></div>
+      <div><span class="pill">Argentina</span><span class="pill">Australia</span><span class="pill">Brazil</span><span class="pill">Bulgaria</span><span class="pill">China</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT07586267.html">CD19/BCMA UCAR-T for B Cell-Related Autoimmune Disease</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT07586267</span>
+        <span class="meta">Early Phase 1</span>
+        <span class="meta">Updated: 2026-05-14</span>
+        <span class="meta">Sponsor: The Children&#x27;s Hospital of Zhejiang University School of Medicine</span>
+      </div>
+      <div><span class="pill">QT-219CX</span></div>
+      <div><span class="pill">China</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT06897930.html">A Study to Investigate the Safety, Tolerability, and Efficacy of AZD0120 in Adults With Refractory SLE</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT06897930</span>
+        <span class="meta">Phase 1, Phase 2</span>
+        <span class="meta">Updated: 2026-05-12</span>
+        <span class="meta">Sponsor: AstraZeneca</span>
+      </div>
+      <div><span class="pill">AZD0120</span><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span></div>
+      <div><span class="pill">Australia</span><span class="pill">Canada</span><span class="pill">United States</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT05835986.html">A First-in-Human Study to Investigate the Safety, Tolerability, Pharmacokinetics and Pharmacodynamics of RO7507062 in Participants With Systemic Lupus Erythematosus</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT05835986</span>
+        <span class="meta">Phase 1</span>
+        <span class="meta">Updated: 2026-05-11</span>
+        <span class="meta">Sponsor: Hoffmann-La Roche</span>
+      </div>
+      <div><span class="pill">RO7507062</span><span class="pill">Tocilizumab</span></div>
+      <div><span class="pill">Colombia</span><span class="pill">France</span><span class="pill">Germany</span><span class="pill">Malaysia</span><span class="pill">Mexico</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT07299422.html">A Study of SHR-2173 in Participants With Systemic Lupus Erythematosus</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT07299422</span>
+        <span class="meta">Phase 2</span>
+        <span class="meta">Updated: 2026-05-11</span>
+        <span class="meta">Sponsor: Guangdong Hengrui Pharmaceutical Co., Ltd</span>
+      </div>
+      <div><span class="pill">SHR-2173 Injection</span><span class="pill">SHR-2173 Injection Placebo</span></div>
+      <div><span class="pill">China</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT07015983.html">A Study of CC-97540 (BMS-986353 or Zola-cel), CD19-Targeted NEX-T CAR T Cells, in Participants With Active SLE Despite Immunosuppressants (Breakfree-SLE)</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT07015983</span>
+        <span class="meta">Phase 2</span>
+        <span class="meta">Updated: 2026-05-08</span>
+        <span class="meta">Sponsor: Juno Therapeutics, Inc., a Bristol-Myers Squibb Company</span>
+      </div>
+      <div><span class="pill">CC-97540</span><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span></div>
+      <div><span class="pill">Argentina</span><span class="pill">Austria</span><span class="pill">Belgium</span><span class="pill">Brazil</span><span class="pill">Canada</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT07438496.html">A Study of Nipocalimab in Adults With Moderate to Severe Systemic Lupus Erythematosus</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT07438496</span>
+        <span class="meta">Phase 3</span>
+        <span class="meta">Updated: 2026-05-08</span>
+        <span class="meta">Sponsor: Janssen Research &amp; Development, LLC</span>
+      </div>
+      <div><span class="pill">Nipocalimab</span><span class="pill">Placebo</span><span class="pill">Standard of care treatment</span></div>
+      <div><span class="pill">Argentina</span><span class="pill">Brazil</span><span class="pill">China</span><span class="pill">Israel</span><span class="pill">Japan</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT06570798.html">A Phase 2 Master Protocol Assessing Inebilizumab and Blinatumomab in Autoimmune Diseases</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT06570798</span>
+        <span class="meta">Phase 2</span>
+        <span class="meta">Updated: 2026-05-07</span>
+        <span class="meta">Sponsor: Amgen</span>
+      </div>
+      <div><span class="pill">Blinatumomab</span><span class="pill">Inebilizumab</span></div>
+      <div><span class="pill">Australia</span><span class="pill">Belgium</span><span class="pill">France</span><span class="pill">Germany</span><span class="pill">Italy</span></div>
+    </article></div>
+          </div>
+        </div>
+        <aside class="side-panel">
+          <h2>Refine</h2>
+          <div class="grid" style="grid-template-columns:1fr; gap:10px;">
+            <div class="box"><span>Current/open records</span><strong>230</strong></div>
+            <div class="box"><span>Recruiting/opening</span><strong>198</strong></div>
+          </div>
+          <div class="actions">
+            <a class="button" href="../explorer.html?topic=asia">View in explorer</a>
+            <a class="button" href="../explorer.html?topic=asia&status=recruiting">Open studies</a>
+            <a class="button" href="../explorer.html?topic=asia&region=non-us">Outside US</a>
+          </div>
+          <h3>Questions for a clinician</h3>
+          <ul><li>Which countries or regions are listed in the public record?</li><li>Is the site recruiting, active, completed, or unclear?</li><li>Where is the official registry source for location details?</li></ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

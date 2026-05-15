@@ -1,0 +1,44 @@
+{
+  "_meta": {
+    "cache_key": "NCT07363590:2026-05-04",
+    "model": "deepseek-v4-flash",
+    "source": "deepseek_chat_completions_api",
+    "trial_id": "NCT07363590"
+  },
+  "may_be_looking_for": [
+    "People with a body mass index between 18 and 32 kg/m²",
+    "People with systemic lupus erythematosus (SLE) diagnosed for at least 6 months and meeting the EULAR/ACR 2019 classification criteria",
+    "People with SLE who are taking at least one background therapy for SLE",
+    "People with rheumatoid arthritis (RA) diagnosed for at least 6 months and meeting the 2010 ACR-EULAR classification criteria for RA"
+  ],
+  "may_exclude_people_who": [
+    "Have a known active infection (excluding fungal infection of nail beds)",
+    "Have had a major episode of infection requiring hospitalization or treatment with anti-infectives within 8 weeks before dosing",
+    "Have a history of serious recurrent or chronic infection",
+    "Are known to be infected with hepatitis B virus, hepatitis C virus, or human immunodeficiency virus (HIV)",
+    "Have evidence of active tuberculosis (TB)"
+  ],
+  "patient_summary": "This study looks at a study medicine called MK-1045 in people with lupus and rheumatoid arthritis (RA). The main goal of the study is to learn about the safety of MK-1045 and if people tolerate it when they receive it at different dose levels (amounts).",
+  "patient_title": "Study of MK-1045 for Lupus or Rheumatoid Arthritis",
+  "questions_to_ask_clinician": [
+    "Does my diagnosis and medical history meet the study criteria?",
+    "What are the possible risks of taking MK-1045?",
+    "How long will the study last and how many visits are required?",
+    "What are the different dose levels being tested?"
+  ],
+  "source_grounding": [
+    "brief_summary: This study looks at a study medicine called MK-1045 in people with lupus and rheumatoid arthritis (RA). The main goal of the study is to learn about the safety of MK-1045 and if people tolerate it when they receive it at different dose levels (amounts).",
+    "conditions: Rheumatoid Arthritis, Systemic Lupus Erythematosus",
+    "countries: Belgium, Georgia, Italy, Japan, Moldova, Romania",
+    "eligibility_excerpt: Inclusion Criteria: ... Has a body mass index between 18 and 32 kg/m^2 ... Systemic lupus erythematosus (SLE): Has a diagnosis of SLE for at least 6 months ... RA: Has a diagnosis of RA for at least 6 months ... Exclusion Criteria: ... active infection ... major episode of infection ... history of serious recurrent or chronic infection ... known to be infected with hepatitis B virus, hepatitis C virus, or human immunodeficiency virus ... active tuberculosis ...",
+    "interventions: MK-1045",
+    "phase: Phase 1",
+    "status: RECRUITING",
+    "title: A Clinical Study of MK-1045 in People With Lupus or Rheumatoid Arthritis (MK-1045-004)"
+  ],
+  "uncertainty_notes": [
+    "This is an early-phase (Phase 1) study. The safety and study outcomes of MK-1045 are not yet fully known.",
+    "The study is currently recruiting participants in several countries."
+  ],
+  "what_researchers_are_studying": "Researchers are studying the safety and tolerability of different doses of MK-1045 in people with lupus or rheumatoid arthritis."
+}

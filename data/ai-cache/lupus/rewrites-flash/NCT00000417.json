@@ -1,0 +1,40 @@
+{
+  "_meta": {
+    "cache_key": "NCT00000417:2013-12-24",
+    "model": "deepseek-v4-flash",
+    "source": "deepseek_chat_completions_api",
+    "trial_id": "NCT00000417"
+  },
+  "may_be_looking_for": [
+    "People with systemic lupus erythematosus (SLE or lupus)",
+    "Have a partner who is willing to participate in the study"
+  ],
+  "may_exclude_people_who": [
+    "are unable to read and write English questionnaires",
+    "cannot be reached by phone",
+    "have a rheumatologist who considers them unable to participate due to cognitive problems or severe illness"
+  ],
+  "patient_summary": "This study examined how communication with a partner, social support, and self-efficacy (belief in managing the condition) affect health in people with lupus. Participants and their partners were assigned to either counseling to improve these skills or to watch an informational film. The study followed them for 12 months to track physical and mental health, disease activity, and other factors.",
+  "patient_title": "Improving Health in Lupus with Partner Support and Communication",
+  "questions_to_ask_clinician": [
+    "Does my rheumatologist think I am able to participate in this type of study?",
+    "Do I meet the reading and writing requirements in English?",
+    "Can I be reached reliably by phone?",
+    "Is my partner willing to participate in the study with me?"
+  ],
+  "source_grounding": [
+    "brief_summary",
+    "conditions",
+    "countries",
+    "eligibility_excerpt",
+    "interventions",
+    "phase",
+    "status",
+    "title"
+  ],
+  "uncertainty_notes": [
+    "This study has been completed, so new participants are not being enrolled. The results may be available in published research papers.",
+    "The study compared counseling to an informational film, but no conclusions about study outcomes are provided here."
+  ],
+  "what_researchers_are_studying": "Researchers wanted to understand how communication with a partner, social support, and a person's belief in their ability to manage lupus (self-efficacy) influence health outcomes over time."
+}

@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fludarabine - Lupus Research Radar</title>
+  <style>
+    :root {
+      --ink: #24211d;
+      --muted: #6f6a60;
+      --line: #d8d2c5;
+      --bg: #f6f3ed;
+      --surface: #fffdf8;
+      --accent: #6d3f5f;
+      --accent-soft: #f3edf2;
+      --warn: #8a5a12;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+    header { background: var(--surface); border-bottom: 1px solid var(--line); }
+    section { background: var(--surface); border-bottom: 1px solid var(--line); }
+    section:nth-child(even) { background: #fbf8f1; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 24px; }
+    .app-nav { border-bottom: 1px solid var(--line); background: rgba(255,255,255,.96); position: sticky; top: 0; z-index: 5; }
+    .app-nav .wrap { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding-top: 12px; padding-bottom: 12px; }
+    .brand { color: var(--ink); font-weight: 800; text-decoration: none; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+    .nav-links a { color: var(--muted); font-size: 13px; font-weight: 750; text-decoration: none; padding: 7px 8px; border-radius: 6px; }
+    .nav-links a:hover { background: var(--accent-soft); color: var(--accent); }
+    .boundary { color: var(--muted); font-size: 13px; margin-top: 10px; }
+    .eyebrow { color: var(--accent); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0; }
+    h1 { margin: 8px 0 10px; font-size: clamp(28px, 4vw, 44px); line-height: 1.08; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 22px; letter-spacing: 0; }
+    h3 { margin: 18px 0 8px; font-size: 17px; letter-spacing: 0; }
+    p { color: var(--muted); }
+    a { color: #5c3b72; text-decoration-thickness: 1px; }
+    .plain { color: #3f3a34; max-width: 860px; }
+    .notice { border-left: 4px solid var(--warn); background: #fff8ea; padding: 14px 16px; color: #46340f; margin-top: 16px; }
+    .ai-note { border-left: 4px solid #77506f; background: #f5edf2; padding: 14px 16px; color: #4e3448; margin-top: 16px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .button { display: inline-block; border: 1px solid var(--line); background: #fffdf8; color: var(--ink); padding: 10px 12px; border-radius: 6px; text-decoration: none; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .box { border: 1px solid var(--line); background: #fbf8f1; padding: 13px; min-height: 86px; }
+    .box span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+    .box strong { display: block; overflow-wrap: anywhere; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; vertical-align: top; padding: 10px; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-size: 12px; text-transform: uppercase; background: #eee8dc; letter-spacing: 0; }
+    ul { padding-left: 20px; color: #3f3a34; }
+    li { margin: 6px 0; }
+    .trial-list { display: grid; gap: 12px; }
+    .trial-card { border: 1px solid var(--line); background: #fffdf8; padding: 15px; border-radius: 8px; }
+    .trial-card h3 { margin: 0 0 8px; font-size: 18px; line-height: 1.28; letter-spacing: 0; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+    .meta { color: var(--muted); font-size: 13px; }
+    .pill { display: inline-block; border: 1px solid var(--line); background: #fffdf8; color: var(--muted); border-radius: 4px; padding: 4px 8px; margin: 2px 4px 2px 0; font-size: 13px; }
+    .status-badge { display: inline-block; padding: 5px 8px; background: var(--accent-soft); color: var(--accent); border: 1px solid #d4c3d1; border-radius: 4px; font-size: 13px; font-weight: 700; }
+    .topic-layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 22px; align-items: start; }
+    .side-panel { border: 1px solid var(--line); background: #fffdf8; border-radius: 8px; padding: 15px; }
+    .compact-section { padding-top: 18px; padding-bottom: 18px; }
+    @media (max-width: 760px) {
+      .wrap { padding: 18px; }
+      .app-nav .wrap { display: block; }
+      .nav-links { justify-content: flex-start; margin-top: 8px; }
+      .grid { grid-template-columns: 1fr; }
+      .topic-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">Intervention research landscape</div>
+      <h1>Fludarabine</h1>
+      <p class="plain">Public trial registry records where this intervention name appears. This page does not evaluate whether the intervention is safe, effective, available, or appropriate for any person.</p>
+      <div class="notice">Verify details in official registry records and discuss clinical questions with a licensed clinician.</div>
+      <div class="actions">
+        <a class="button" href="../index.html">Back to radar</a>
+        <a class="button" href="../glossary.html">Glossary</a>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section>
+      <div class="wrap">
+        <h2>At A Glance</h2>
+        <div class="grid">
+          <div class="box"><span>Public records</span><strong>19</strong></div>
+          <div class="box"><span>Current/open records</span><strong>17</strong></div>
+          <div class="box"><span>Recruiting/opening</span><strong>14</strong></div>
+          <div class="box"><span>Highest listed phase</span><strong>Phase 2</strong></div>
+          <div class="box"><span>Latest registry update</span><strong>2026-05-12</strong></div>
+          <div class="box"><span>Countries</span><strong>22</strong></div>
+          <div class="box"><span>Sponsors</span><strong>17</strong></div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="wrap">
+        <h2>Pipeline Signals In This Radar</h2>
+        <p class="plain">This is a trial-layer landscape, not a full drug or device approval dossier. Future layers can add approvals, publications, company pipeline pages, and press releases while keeping this page as the public-trial base layer.</p>
+        <div class="grid">
+          <div><h3>Intervention type</h3><table><tbody><tr><td>drug</td><td style="text-align:right">19</td></tr><tr><td>biological</td><td style="text-align:right">9</td></tr><tr><td>procedure</td><td style="text-align:right">2</td></tr><tr><td>radiation</td><td style="text-align:right">2</td></tr><tr><td>genetic</td><td style="text-align:right">1</td></tr><tr><td>device</td><td style="text-align:right">1</td></tr></tbody></table></div>
+          <div><h3>Study type</h3><table><tbody><tr><td>INTERVENTIONAL</td><td style="text-align:right">19</td></tr></tbody></table></div>
+          <div><h3>Phase</h3><table><tbody><tr><td>Phase 1</td><td style="text-align:right">13</td></tr><tr><td>Phase 1, Phase 2</td><td style="text-align:right">4</td></tr><tr><td>Phase 2</td><td style="text-align:right">1</td></tr><tr><td>N/A</td><td style="text-align:right">1</td></tr></tbody></table></div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="wrap">
+        <h2>Landscape</h2>
+        <div class="grid">
+          <div><h3>Status</h3><table><tbody><tr><td>RECRUITING</td><td style="text-align:right">8</td></tr><tr><td>NOT_YET_RECRUITING</td><td style="text-align:right">4</td></tr><tr><td>ACTIVE_NOT_RECRUITING</td><td style="text-align:right">3</td></tr><tr><td>ENROLLING_BY_INVITATION</td><td style="text-align:right">2</td></tr><tr><td>TERMINATED</td><td style="text-align:right">2</td></tr></tbody></table></div>
+          <div><h3>Top countries</h3><table><tbody><tr><td>United States</td><td style="text-align:right">14</td></tr><tr><td>France</td><td style="text-align:right">4</td></tr><tr><td>Australia</td><td style="text-align:right">3</td></tr><tr><td>Canada</td><td style="text-align:right">3</td></tr><tr><td>Germany</td><td style="text-align:right">3</td></tr><tr><td>Spain</td><td style="text-align:right">3</td></tr><tr><td>China</td><td style="text-align:right">3</td></tr><tr><td>Belgium</td><td style="text-align:right">2</td></tr><tr><td>Brazil</td><td style="text-align:right">2</td></tr><tr><td>Israel</td><td style="text-align:right">2</td></tr><tr><td>Italy</td><td style="text-align:right">2</td></tr><tr><td>Poland</td><td style="text-align:right">2</td></tr></tbody></table></div>
+          <div><h3>Top sponsors</h3><table><tbody><tr><td>Juno Therapeutics, Inc., a Bristol-Myers Squibb Company</td><td style="text-align:right">3</td></tr><tr><td>AstraZeneca</td><td style="text-align:right">1</td></tr><tr><td>Fate Therapeutics</td><td style="text-align:right">1</td></tr><tr><td>Beijing Biotech</td><td style="text-align:right">1</td></tr><tr><td>IRIS Research and Development, LLC</td><td style="text-align:right">1</td></tr><tr><td>Alice Bertaina</td><td style="text-align:right">1</td></tr><tr><td>Genentech, Inc.</td><td style="text-align:right">1</td></tr><tr><td>Institute of Hematology &amp; Blood Diseases Hospital, China</td><td style="text-align:right">1</td></tr><tr><td>Miltenyi Biomedicine GmbH</td><td style="text-align:right">1</td></tr><tr><td>EdiGene Inc.</td><td style="text-align:right">1</td></tr><tr><td>Kite, A Gilead Company</td><td style="text-align:right">1</td></tr><tr><td>Adicet Therapeutics</td><td style="text-align:right">1</td></tr></tbody></table></div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="wrap">
+        <h2>Related Trial Records</h2>
+        <p class="plain">Showing up to 80 records, prioritized by current/open status and recent updates.</p>
+        <div class="trial-list"><article class="trial-card">
+      <h3><a href="../trials/NCT06897930.html">A Study to Investigate the Safety, Tolerability, and Efficacy of AZD0120 in Adults With Refractory SLE</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT06897930</span>
+        <span class="meta">Phase 1, Phase 2</span>
+        <span class="meta">Updated: 2026-05-12</span>
+        <span class="meta">Sponsor: AstraZeneca</span>
+      </div>
+      <div><span class="pill">AZD0120</span><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span></div>
+      <div><span class="pill">Australia</span><span class="pill">Canada</span><span class="pill">United States</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT07015983.html">A Study of CC-97540 (BMS-986353 or Zola-cel), CD19-Targeted NEX-T CAR T Cells, in Participants With Active SLE Despite Immunosuppressants (Breakfree-SLE)</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT07015983</span>
+        <span class="meta">Phase 2</span>
+        <span class="meta">Updated: 2026-05-08</span>
+        <span class="meta">Sponsor: Juno Therapeutics, Inc., a Bristol-Myers Squibb Company</span>
+      </div>
+      <div><span class="pill">CC-97540</span><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span></div>
+      <div><span class="pill">Argentina</span><span class="pill">Austria</span><span class="pill">Belgium</span><span class="pill">Brazil</span><span class="pill">Canada</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT05869955.html">A Study of CC-97540, CD-19-Targeted Nex-T CAR T Cells, in Participants With Severe, Refractory Autoimmune Diseases (Breakfree-1)</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT05869955</span>
+        <span class="meta">Phase 1</span>
+        <span class="meta">Updated: 2026-05-04</span>
+        <span class="meta">Sponsor: Juno Therapeutics, Inc., a Bristol-Myers Squibb Company</span>
+      </div>
+      <div><span class="pill">CC-97540</span><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span><span class="pill">Tocilizumab</span></div>
+      <div><span class="pill">Belgium</span><span class="pill">France</span><span class="pill">Germany</span><span class="pill">Italy</span><span class="pill">Spain</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT06308978.html">A Phase 1 Study of FT819 in B-cell Mediated Autoimmune Disease</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT06308978</span>
+        <span class="meta">Phase 1</span>
+        <span class="meta">Updated: 2026-05-01</span>
+        <span class="meta">Sponsor: Fate Therapeutics</span>
+      </div>
+      <div><span class="pill">Bendamustine</span><span class="pill">Cyclophosphamide</span><span class="pill">FT819</span><span class="pill">Fludarabine</span></div>
+      <div><span class="pill">France</span><span class="pill">Sweden</span><span class="pill">United Kingdom</span><span class="pill">United States</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT07115745.html">A Study of Healthy Donor CD19-targeted Allogeneic CAR T Cells in Participants With Severe, Refractory Autoimmune Diseases</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT07115745</span>
+        <span class="meta">Phase 1</span>
+        <span class="meta">Updated: 2026-04-30</span>
+        <span class="meta">Sponsor: Juno Therapeutics, Inc., a Bristol-Myers Squibb Company</span>
+      </div>
+      <div><span class="pill">BMS-986515</span><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span><span class="pill">Tocilizumab</span></div>
+      <div><span class="pill">Australia</span><span class="pill">Brazil</span><span class="pill">Czechia</span><span class="pill">France</span><span class="pill">Germany</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT07523542.html">SELECT-SLE: Biomarker-Guided CAR-T Target Selection for Refractory Lupus</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT07523542</span>
+        <span class="meta">Phase 1, Phase 2</span>
+        <span class="meta">Updated: 2026-04-13</span>
+        <span class="meta">Sponsor: Beijing Biotech</span>
+      </div>
+      <div><span class="pill">Autologous anti-CD19 CAR-T cells, intravenous single infusion at protocol-defined dose level (1 x 10^6 or 3 x 10^6 CAR-positive viable T cells/kg).</span><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span></div>
+      <div><span class="pill">China</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT06581562.html">Open-label Single-Center Study to Evaluate the Safety and Efficacy of Combining Rituximab and AB-101 in B-cell Associated Autoimmune Diseases.</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT06581562</span>
+        <span class="meta">Phase 1</span>
+        <span class="meta">Updated: 2024-09-03</span>
+        <span class="meta">Sponsor: IRIS Research and Development, LLC</span>
+      </div>
+      <div><span class="pill">AB-101</span><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span><span class="pill">Rituximab</span></div>
+      <div><span class="pill">United States</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT05508009.html">Early Trial of Allogeneic Hematopoietic Stem Cell Transplantation for Patients Who Will Receive a Kidney Transplant From the Same Donor</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Recruiting</span>
+        <span class="meta">NCT05508009</span>
+        <span class="meta">Phase 1, Phase 2</span>
+        <span class="meta">Updated: 2023-07-17</span>
+        <span class="meta">Sponsor: Alice Bertaina</span>
+      </div>
+      <div><span class="pill">ATG</span><span class="pill">CliniMACS® TCR α/β Reagent Kit and CliniMACS® CD19 System</span><span class="pill">Cyclophosphamide 100 mg/Kg</span><span class="pill">Cyclophosphamide 1200 mg/Kg</span><span class="pill">Fludarabine</span></div>
+      <div><span class="pill">United States</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT06984341.html">A Study to Evaluate the Safety, Tolerability, Cellular Kinetics, Pharmacodynamics, and Efficacy of P-CD19CD20-ALLO1 in Participants With Severe, Treatment-refractory Systemic Lupus Erythematosus (SLE)</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Not Yet Recruiting</span>
+        <span class="meta">NCT06984341</span>
+        <span class="meta">Phase 1</span>
+        <span class="meta">Updated: 2026-04-23</span>
+        <span class="meta">Sponsor: Genentech, Inc.</span>
+      </div>
+      <div><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span><span class="pill">P-CD19CD20-ALLO1 Cells</span><span class="pill">Rimiducid</span></div>
+      <div><span class="pill">United States</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT07490275.html">Allogeneic CD19/BCMA-Targeted CAR-γδT Cell Therapy: Safety and Preliminary Pharmacodynamics in Relapsed/Refractory Autoimmune Diseases</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Not Yet Recruiting</span>
+        <span class="meta">NCT07490275</span>
+        <span class="meta">Phase 1</span>
+        <span class="meta">Updated: 2026-03-24</span>
+        <span class="meta">Sponsor: Institute of Hematology &amp; Blood Diseases Hospital, China</span>
+      </div>
+      <div><span class="pill">Allogeneic CD19/BCMA-targeted CAR-γδT cell injection</span><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span></div>
+      <div><span class="pill">Locations not listed</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT06708845.html">US Zamto-cel Autoimmune Diseases</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Not Yet Recruiting</span>
+        <span class="meta">NCT06708845</span>
+        <span class="meta">Phase 1</span>
+        <span class="meta">Updated: 2024-11-27</span>
+        <span class="meta">Sponsor: Miltenyi Biomedicine GmbH</span>
+      </div>
+      <div><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span><span class="pill">zamtocabtagene autoleucel</span></div>
+      <div><span class="pill">Locations not listed</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT06373991.html">A Study to Evaluate the Safety and Efficacy of ATHENA CAR-T in Subjects With Systemic Lupus Erythematosus</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Not Yet Recruiting</span>
+        <span class="meta">NCT06373991</span>
+        <span class="meta">Phase 1</span>
+        <span class="meta">Updated: 2024-06-17</span>
+        <span class="meta">Sponsor: EdiGene Inc.</span>
+      </div>
+      <div><span class="pill">ATHENA CAR-T</span><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span></div>
+      <div><span class="pill">China</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT07038447.html">A Study of KITE-363 in Participants With Refractory Autoimmune Diseases</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Enrolling By Invitation</span>
+        <span class="meta">NCT07038447</span>
+        <span class="meta">Phase 1</span>
+        <span class="meta">Updated: 2026-04-06</span>
+        <span class="meta">Sponsor: Kite, A Gilead Company</span>
+      </div>
+      <div><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span><span class="pill">KITE-363</span></div>
+      <div><span class="pill">Australia</span><span class="pill">Canada</span><span class="pill">United States</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT06375993.html">A Phase 1 Study of Prulacabtagene Leucel (Prula-cel, Formerly ADI-001) in Autoimmune Disease</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Enrolling By Invitation</span>
+        <span class="meta">NCT06375993</span>
+        <span class="meta">Phase 1</span>
+        <span class="meta">Updated: 2026-03-19</span>
+        <span class="meta">Sponsor: Adicet Therapeutics</span>
+      </div>
+      <div><span class="pill">ADI-001</span><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span></div>
+      <div><span class="pill">United States</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT06152172.html">CARTIMMUNE: Study of Patients With Autoimmune Diseases Receiving KYV-101</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Active Not Recruiting</span>
+        <span class="meta">NCT06152172</span>
+        <span class="meta">Phase 1</span>
+        <span class="meta">Updated: 2026-02-18</span>
+        <span class="meta">Sponsor: David Porter</span>
+      </div>
+      <div><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span><span class="pill">KYV-101</span></div>
+      <div><span class="pill">United States</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT06265220.html">AB-101 in Combination With B-Cell Depleting mAb in Patients Who Failed Treatment for Class III or IV Lupus Nephritis or Other Forms of Refractory Systemic Lupus Erythematosus</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Active Not Recruiting</span>
+        <span class="meta">NCT06265220</span>
+        <span class="meta">Phase 1</span>
+        <span class="meta">Updated: 2025-12-10</span>
+        <span class="meta">Sponsor: Artiva Biotherapeutics, Inc.</span>
+      </div>
+      <div><span class="pill">AB-101</span><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span><span class="pill">Obinutuzumab</span><span class="pill">Rituximab</span></div>
+      <div><span class="pill">United States</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT07155369.html">UCAR T-cell Therapy Targeting CD19/ BCMA in Patients With Relapse/ Refractory Autoimmune Diseases</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Active Not Recruiting</span>
+        <span class="meta">NCT07155369</span>
+        <span class="meta">No standard drug phase listed</span>
+        <span class="meta">Updated: 2025-09-04</span>
+        <span class="meta">Sponsor: The Affiliated Hospital of Xuzhou Medical University</span>
+      </div>
+      <div><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span><span class="pill">UCAR-T cells</span></div>
+      <div><span class="pill">China</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT02080195.html">Nonmyeloablative Conditioning and Transplantation for Patients With Refractory Systemic Lupus Erythematosus (SLE)</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Terminated</span>
+        <span class="meta">NCT02080195</span>
+        <span class="meta">Phase 1, Phase 2</span>
+        <span class="meta">Updated: 2019-10-02</span>
+        <span class="meta">Sponsor: Sidney Kimmel Comprehensive Cancer Center at Johns Hopkins</span>
+      </div>
+      <div><span class="pill">Allogeneic bone marrow transplant</span><span class="pill">Cyclophosphamide</span><span class="pill">Fludarabine</span><span class="pill">Mycophenolate Mofetil</span><span class="pill">Rabbit antithymocyte globulin</span></div>
+      <div><span class="pill">United States</span></div>
+    </article>
+<article class="trial-card">
+      <h3><a href="../trials/NCT00684255.html">Reduced Intensity Transplant in Medically Refractory Systemic Lupus Erythematosus (SLE) and Systemic Sclerosis (SSc)</a></h3>
+      <div class="meta-row">
+        <span class="status-badge">Terminated</span>
+        <span class="meta">NCT00684255</span>
+        <span class="meta">Phase 1</span>
+        <span class="meta">Updated: 2014-04-01</span>
+        <span class="meta">Sponsor: New York Medical College</span>
+      </div>
+      <div><span class="pill">Busulfan</span><span class="pill">Campath</span><span class="pill">Fludarabine</span><span class="pill">Reduced Intensity Allogeneic Transplant</span></div>
+      <div><span class="pill">United States</span></div>
+    </article></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,49 @@
+{
+  "_meta": {
+    "cache_key": "NCT00000419:2013-05-03",
+    "model": "deepseek-v4-flash",
+    "source": "deepseek_chat_completions_api",
+    "trial_id": "NCT00000419"
+  },
+  "may_be_looking_for": [
+    "Women with a confirmed diagnosis of lupus (SLE)",
+    "Women whose lupus is inactive or stable on low-dose prednisone (0.5 mg/kg/day or less)",
+    "Women who have gone through menopause (no periods for at least 6 months or chemical evidence of menopause)"
+  ],
+  "may_exclude_people_who": [
+    "Have high blood pressure (over 145/95 on three occasions)",
+    "Have had a blood clot (deep vein thrombosis, pulmonary embolism, or arterial thrombosis)",
+    "Have high levels of antiphospholipid antibodies",
+    "Have ever had antiphospholipid antibody syndrome",
+    "Have a history of gynecologic or breast cancer",
+    "Have liver problems or liver tumors",
+    "Have diabetes with vascular disease",
+    "Have a congenital lipid disorder",
+    "Have complicated migraines",
+    "Have severe lupus activity (SLEDAI >12) or a recent increase in disease activity",
+    "Have unexplained vaginal bleeding",
+    "Have used estrogen (hormone replacement therapy or birth control pills) for more than one month after lupus diagnosis",
+    "Have low FSH levels (<40)",
+    "Have had a heart attack before menopause"
+  ],
+  "patient_summary": "This study was designed to see safety questions about estrogen replacement therapy in postmenopausal women with lupus (systemic lupus erythematosus). The researchers wanted to understand how estrogen replacement might affect lupus disease activity and severity.",
+  "patient_title": "Study of Estrogen Replacement Therapy in Women with Lupus",
+  "questions_to_ask_clinician": [
+    "What would a clinician consider when deciding if hormone replacement therapy is safe for someone with lupus?",
+    "What is the current understanding of estrogen's effect on lupus activity?",
+    "Are there alternative treatments for menopausal symptoms in women with lupus?"
+  ],
+  "source_grounding": [
+    "brief_summary",
+    "conditions",
+    "eligibility_excerpt",
+    "interventions",
+    "phase",
+    "status",
+    "title"
+  ],
+  "uncertainty_notes": [
+    "This study was terminated before completion, so the full results are not available. The safety and study outcomes of estrogen replacement in women with lupus remains uncertain."
+  ],
+  "what_researchers_are_studying": "Researchers were studying whether postmenopausal women with lupus could safely take estrogen replacement therapy, and how it might affect the activity and severity of their lupus."
+}
