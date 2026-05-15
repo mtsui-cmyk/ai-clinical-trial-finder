@@ -3,132 +3,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Recent Changes - Lupus Research Radar</title>
+  <title>Updates - TrialCompass</title>
   <style>
-    :root {
-      --ink: #24211d;
-      --muted: #6f6a60;
-      --line: #d8d2c5;
-      --bg: #f6f3ed;
-      --surface: #fffdf8;
-      --accent: #6d3f5f;
-      --accent-soft: #f3edf2;
-      --warn: #8a5a12;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--ink);
-      background: var(--bg);
-      line-height: 1.5;
-    }
-    header { background: var(--surface); border-bottom: 1px solid var(--line); }
-    section { background: var(--surface); border-bottom: 1px solid var(--line); }
-    section:nth-child(even) { background: #fbf8f1; }
-    .wrap { max-width: 1080px; margin: 0 auto; padding: 24px; }
-    .app-nav { border-bottom: 1px solid var(--line); background: rgba(255,255,255,.96); position: sticky; top: 0; z-index: 5; }
-    .app-nav .wrap { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding-top: 12px; padding-bottom: 12px; }
-    .brand { color: var(--ink); font-weight: 800; text-decoration: none; }
-    .nav-links { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
-    .nav-links a { color: var(--muted); font-size: 13px; font-weight: 750; text-decoration: none; padding: 7px 8px; border-radius: 6px; }
-    .nav-links a:hover { background: var(--accent-soft); color: var(--accent); }
-    .boundary { color: var(--muted); font-size: 13px; margin-top: 10px; }
-    .eyebrow { color: var(--accent); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0; }
-    h1 { margin: 8px 0 10px; font-size: clamp(28px, 4vw, 44px); line-height: 1.08; letter-spacing: 0; }
-    h2 { margin: 0 0 14px; font-size: 22px; letter-spacing: 0; }
-    h3 { margin: 18px 0 8px; font-size: 17px; letter-spacing: 0; }
-    p { color: var(--muted); }
-    a { color: #5c3b72; text-decoration-thickness: 1px; }
-    .plain { color: #3f3a34; max-width: 860px; }
-    .notice { border-left: 4px solid var(--warn); background: #fff8ea; padding: 14px 16px; color: #46340f; margin-top: 16px; }
-    .ai-note { border-left: 4px solid #77506f; background: #f5edf2; padding: 14px 16px; color: #4e3448; margin-top: 16px; }
-    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-    .button { display: inline-block; border: 1px solid var(--line); background: #fffdf8; color: var(--ink); padding: 10px 12px; border-radius: 6px; text-decoration: none; }
-    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-    .box { border: 1px solid var(--line); background: #fbf8f1; padding: 13px; min-height: 86px; }
-    .box span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 4px; }
-    .box strong { display: block; overflow-wrap: anywhere; }
-    table { width: 100%; border-collapse: collapse; font-size: 14px; }
-    th, td { text-align: left; vertical-align: top; padding: 10px; border-bottom: 1px solid var(--line); }
-    th { color: var(--muted); font-size: 12px; text-transform: uppercase; background: #eee8dc; letter-spacing: 0; }
-    ul { padding-left: 20px; color: #3f3a34; }
-    li { margin: 6px 0; }
-    .trial-list { display: grid; gap: 12px; }
-    .trial-card { border: 1px solid var(--line); background: #fffdf8; padding: 15px; border-radius: 8px; }
-    .trial-card h3 { margin: 0 0 8px; font-size: 18px; line-height: 1.28; letter-spacing: 0; }
-    .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
-    .meta { color: var(--muted); font-size: 13px; }
-    .pill { display: inline-block; border: 1px solid var(--line); background: #fffdf8; color: var(--muted); border-radius: 4px; padding: 4px 8px; margin: 2px 4px 2px 0; font-size: 13px; }
-    .status-badge { display: inline-block; padding: 5px 8px; background: var(--accent-soft); color: var(--accent); border: 1px solid #d4c3d1; border-radius: 4px; font-size: 13px; font-weight: 700; }
-    .topic-layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 22px; align-items: start; }
-    .side-panel { border: 1px solid var(--line); background: #fffdf8; border-radius: 8px; padding: 15px; }
-    .compact-section { padding-top: 18px; padding-bottom: 18px; }
-    @media (max-width: 760px) {
-      .wrap { padding: 18px; }
-      .app-nav .wrap { display: block; }
-      .nav-links { justify-content: flex-start; margin-top: 8px; }
-      .grid { grid-template-columns: 1fr; }
-      .topic-layout { grid-template-columns: 1fr; }
-    }
+    body { margin: 0; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #24211d; background: #f6f3ed; line-height: 1.5; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 34px 24px; }
+    nav { border-bottom: 1px solid #d8d2c5; background: #fffdf8; }
+    nav .wrap { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; padding-bottom: 14px; }
+    .brand { color: #24211d; font-weight: 800; text-decoration: none; }
+    .links { display: flex; gap: 12px; flex-wrap: wrap; }
+    .links a { color: #6f6a60; text-decoration: none; font-weight: 700; font-size: 14px; }
+    h1 { font-size: 34px; margin: 0 0 12px; }
+    p { color: #514b43; }
   </style>
 </head>
 <body>
-  <header>
+  <nav>
     <div class="wrap">
-      <div class="eyebrow">Weekly public-data changes</div>
-      <h1>Recent Changes</h1>
-      <p class="plain">Changes are computed against the previous generated dataset in this repo. A change means the public registry record changed; it does not imply a clinical conclusion.</p>
-      <div class="actions"><a class="button" href="index.html">Back to radar</a></div>
-    </div>
-  </header>
-  <main>
-    <section><div class="wrap">
-      <h2>What Changed This Week</h2>
-      <p class="plain">This run found 3 new public records, 31 records with tracked field changes, and 0 records no longer present in the local disease-scoped result set.</p>
-      <div class="grid">
-        <div class="box"><span>New records</span><strong>3</strong></div>
-        <div class="box"><span>Changed records</span><strong>31</strong></div>
-        <div class="box"><span>Removed records</span><strong>Not listed</strong></div>
+      <a class="brand" href="index.html">TrialCompass</a>
+      <div class="links">
+        <a href="finder.html">Find</a>
+        <a href="explorer.html">Learn</a>
+        <a href="changes.html">Updates</a>
       </div>
-      <p class="plain">Interpret this as public-data monitoring only. A registry update may be administrative, operational, or clinical; this page does not judge importance.</p>
-      <h3>Most changed fields</h3><table><tbody><tr><td>last_update_posted</td><td style="text-align:right">31</td></tr><tr><td>status</td><td style="text-align:right">3</td></tr><tr><td>countries</td><td style="text-align:right">3</td></tr><tr><td>interventions</td><td style="text-align:right">2</td></tr></tbody></table>
-    </div></section>
-    <section><div class="wrap"><h2>New Records</h2><article class="trial-card"><h3><a href="trials/NCT07575347.html">NCT07575347</a></h3><p class="plain">Periodontal Disease in Rare Renal Disorders (PERIO-RA-RE)</p><span class="status-badge">Not Yet Recruiting</span></article>
-<article class="trial-card"><h3><a href="trials/NCT07583030.html">NCT07583030</a></h3><p class="plain">A Clinical Study to Evaluate LVIVO-TaVec400 for the Treatment of Relapsed/Refractory Autoimmune Diseases</p><span class="status-badge">Not Yet Recruiting</span></article>
-<article class="trial-card"><h3><a href="trials/NCT07586267.html">NCT07586267</a></h3><p class="plain">CD19/BCMA UCAR-T for B Cell-Related Autoimmune Disease</p><span class="status-badge">Recruiting</span></article></div></section>
-    <section><div class="wrap"><h2>Changed Records</h2><article class="trial-card"><h3><a href="trials/NCT03421184.html">NCT03421184</a></h3><p class="plain">Dietary Phytoestrogens as Risk Factors for Systemic Lupus Erythematosus</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT03575156.html">NCT03575156</a></h3><p class="plain">Microparticles&#x27;s Role in the Pathophysiology of Systemic Lupus Erythematosus and Systemic Sclerosis</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT03656562.html">NCT03656562</a></h3><p class="plain">Study the Efficacy and Safety of VAY736 and CFZ533 in SLE Patients</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT03816345.html">NCT03816345</a></h3><p class="plain">Testing an Immunotherapy Anti-cancer Drug, Nivolumab, for Advanced Cancers in Patients With Autoimmune Disorders, AIM-NIVO</p><span class="meta">Changed: interventions, last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT04221477.html">NCT04221477</a></h3><p class="plain">A Study to Evaluate the Efficacy and Safety of Obinutuzumab in Participants With ISN/RPS 2003 Class III or IV Lupus Nephritis</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT04895696.html">NCT04895696</a></h3><p class="plain">A Study Evaluating the Efficacy and Safety of Afimetoran Compared With Placebo in Participants With Active Systemic Lupus Erythematosus (SLE)</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT04908865.html">NCT04908865</a></h3><p class="plain">Open-label Study of Belimumab Plus Standard Therapy in Chinese Pediatric Participants With Active Systemic Lupus Erythematosus (SLE)</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT04963296.html">NCT04963296</a></h3><p class="plain">A Study to Evaluate the Efficacy and Safety of Obinutuzumab in Participants With Systemic Lupus Erythematosus</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT05352919.html">NCT05352919</a></h3><p class="plain">An Extension Study to Learn More About the Long-Term Safety of Litifilimab (BIIB059) Injections and Whether They Can Improve Symptoms of Adult Participants Who Have Systemic Lupus Erythematosus</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT05835986.html">NCT05835986</a></h3><p class="plain">A First-in-Human Study to Investigate the Safety, Tolerability, Pharmacokinetics and Pharmacodynamics of RO7507062 in Participants With Systemic Lupus Erythematosus</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT05856448.html">NCT05856448</a></h3><p class="plain">A Study Evaluating the Effects of GLPG3667 Administered as Oral Treatment in Adult Participants With Active Systemic Lupus Erythematosus</p><span class="meta">Changed: interventions, last_update_posted, status</span></article>
-<article class="trial-card"><h3><a href="trials/NCT06208514.html">NCT06208514</a></h3><p class="plain">Brief Pain Exposure Therapy (BPET) For Nociplastic Pain</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT06293365.html">NCT06293365</a></h3><p class="plain">Two-period Crossover Study to Demonstrate the Comparability of Pharmacokinetics of Subcutaneous Ianalumab Between 2mL Auto-injector/2mL PFS with1mL Pre-filled Syringe in Adult Participants With Autoimmune Disease</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT06308770.html">NCT06308770</a></h3><p class="plain">Fatigue in Lupus Intervention Programmes (FLIP)</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT06557265.html">NCT06557265</a></h3><p class="plain">A Phase 1/2 Study of NKX019 in Subjects With Autoimmune Disease (Ntrust-1)</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT06570798.html">NCT06570798</a></h3><p class="plain">A Phase 2 Master Protocol Assessing Inebilizumab and Blinatumomab in Autoimmune Diseases</p><span class="meta">Changed: countries, last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT06594068.html">NCT06594068</a></h3><p class="plain">Prospective Registry Investigating Maternal, Infant, and Lactation Outcomes in Anifrolumab Users</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT06673043.html">NCT06673043</a></h3><p class="plain">Anifrolumab Real-world Treatment Outcomes in Systemic Lupus Erythematosus</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT06897930.html">NCT06897930</a></h3><p class="plain">A Study to Investigate the Safety, Tolerability, and Efficacy of AZD0120 in Adults With Refractory SLE</p><span class="meta">Changed: countries, last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT06948110.html">NCT06948110</a></h3><p class="plain">Deciphering the Genetic Architecture of Autoimmune Diseases</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT06977724.html">NCT06977724</a></h3><p class="plain">A Study to Assess Adverse Events, How the Drug Moves Through the Body and Effectiveness of Intravenous Infusions of ABBV-319 in Adult Participants With Systemic Lupus Erythematosus (SLE) and Sjogren&#x27;s Disease (SjD)</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT07015983.html">NCT07015983</a></h3><p class="plain">A Study of CC-97540 (BMS-986353 or Zola-cel), CD19-Targeted NEX-T CAR T Cells, in Participants With Active SLE Despite Immunosuppressants (Breakfree-SLE)</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT07043153.html">NCT07043153</a></h3><p class="plain">AGR+PNI as Predictors of Systemic Lupus Erythematosus Disease Activity</p><span class="meta">Changed: last_update_posted, status</span></article>
-<article class="trial-card"><h3><a href="trials/NCT07299422.html">NCT07299422</a></h3><p class="plain">A Study of SHR-2173 in Participants With Systemic Lupus Erythematosus</p><span class="meta">Changed: last_update_posted, status</span></article>
-<article class="trial-card"><h3><a href="trials/NCT07332481.html">NCT07332481</a></h3><p class="plain">A Study of Enpatoran in Participants With Cutaneous Manifestations of Lupus With or Without Systemic Disease</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT07355218.html">NCT07355218</a></h3><p class="plain">A Study of Enpatoran in Participants With Cutaneous Manifestations of Lupus With or Without Systemic Disease (ELOWEN-2)</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT07409181.html">NCT07409181</a></h3><p class="plain">A Study to Test Whether Different Doses of BI 3000202 Help People With Systemic Lupus Erythematosus (SLE)</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT07424261.html">NCT07424261</a></h3><p class="plain">NIS to Examine Disease Activity in SLE Patients Treated With Subcutaneous Anifrolumab in Routine Care</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT07438496.html">NCT07438496</a></h3><p class="plain">A Study of Nipocalimab in Adults With Moderate to Severe Systemic Lupus Erythematosus</p><span class="meta">Changed: countries, last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT07509892.html">NCT07509892</a></h3><p class="plain">A Clinical Trial on the Efficacy and Safety of TQH3906 in the Treatment of Systemic Lupus Erythematosus</p><span class="meta">Changed: last_update_posted</span></article>
-<article class="trial-card"><h3><a href="trials/NCT07570862.html">NCT07570862</a></h3><p class="plain">A Phase 2, Open-Label, Single-Arm Trial of FT819 in Participants With Lupus Nephritis</p><span class="meta">Changed: last_update_posted</span></article></div></section>
-    <section><div class="wrap"><h2>Removed Records</h2><p class="plain">No removed records compared with the previous local run.</p></div></section>
+    </div>
+  </nav>
+  <main class="wrap">
+    <h1>Updates</h1>
+    <p>Generated weekly reports and registry snapshots are intentionally excluded from the public source tree. Run the scripts locally or publish generated reports as deployment artifacts when needed.</p>
   </main>
 </body>
 </html>
