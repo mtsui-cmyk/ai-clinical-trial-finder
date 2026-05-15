@@ -118,6 +118,8 @@ See [SECURITY.md](SECURITY.md) and [docs/PUBLISHING.md](docs/PUBLISHING.md) befo
 - `tests/`: unit and integration tests
 - `docs/`: product, safety, and publishing notes
 
+Generated registry snapshots, AI cache files, reports, and bulk static trial pages are intentionally not committed. They can be regenerated locally from public sources when needed.
+
 ## Contributing
 
 Contributions are welcome. Useful areas include:

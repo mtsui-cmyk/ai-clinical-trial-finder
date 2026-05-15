@@ -12,6 +12,13 @@ venv/
 
 # Raw registry records can be regenerated and are noisy for Git history.
 data/raw/
+data/current/
+data/snapshots/
+data/ai-cache/
+reports/
+site/trials/
+site/interventions/
+site/topics/
 
 # Runtime cache for the on-demand finder. Metadata stores query hashes only.
 .trial-finder-cache/
