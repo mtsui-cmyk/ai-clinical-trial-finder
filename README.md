@@ -158,6 +158,19 @@ GitHub Pages can host the static `site/` pages.
 
 The dynamic trial finder uses a FastAPI backend, so `/api/search` needs a backend host such as Render, Fly.io, Railway, a VM, or another server environment.
 
+Useful runtime environment variables:
+
+```bash
+TRIAL_FINDER_CACHE=.trial-finder-cache
+TRIAL_FINDER_CACHE_TTL_DAYS=7
+TRIAL_FINDER_RATE_LIMIT_PER_MINUTE=60
+TRIAL_FINDER_ALLOW_ORIGINS=https://your-site.example
+TRIAL_FINDER_UVICORN_HOST=127.0.0.1
+TRIAL_FINDER_UVICORN_PORT=8000
+```
+
+The backend also exposes `GET /health` for deployment checks. Optional external geocoding can be enabled with `TRIAL_FINDER_GEOCODER=nominatim`; keep the default `local` mode if you do not want typed locations sent to a third-party geocoder.
+
 Never expose AI provider keys in frontend code.
 
 ## License

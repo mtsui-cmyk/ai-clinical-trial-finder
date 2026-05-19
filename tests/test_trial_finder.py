@@ -2,6 +2,7 @@ import json
 import sqlite3
 import tempfile
 import unittest
+import urllib.error
 from pathlib import Path
 from unittest.mock import patch
 
@@ -13,6 +14,7 @@ from trial_finder.cache import FinderCache
 from trial_finder.clinicaltrials_gov import build_search_params, normalize_for_finder
 from trial_finder.geo import resolve_location
 from trial_finder.service import create_app
+from trial_finder.settings import AppSettings
 from trial_finder.source_catalog import list_sources
 
 
@@ -153,6 +155,7 @@ class TrialFinderTests(unittest.TestCase):
                 )
 
             self.assertEqual(response.status_code, 200)
+            self.assertEqual(fetch_search.call_args.kwargs["geocoder_provider"], "local")
             payload = response.json()
             self.assertEqual(payload["count"], 1)
             self.assertEqual(payload["sources"][0]["status"], "connected")
@@ -171,6 +174,60 @@ class TrialFinderTests(unittest.TestCase):
             self.assertIn("prompt", ai_response)
             self.assertIn("does not recommend", ai_response["safety_note"])
 
+    def test_health_endpoint_exposes_runtime_without_location_history(self):
+        with tempfile.TemporaryDirectory() as directory:
+            settings = AppSettings(cache_root=directory, geocoder="local", rate_limit_per_minute=60)
+            app = create_app(settings=settings)
+            client = TestClient(app)
+
+            response = client.get("/health")
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertEqual(payload["status"], "ok")
+        self.assertEqual(payload["geocoder"], "local")
+        self.assertIn("No patient profile", payload["privacy"])
+        self.assertNotIn("location_text", json.dumps(payload))
+
+    def test_rate_limit_applies_to_api_without_blocking_health(self):
+        with tempfile.TemporaryDirectory() as directory:
+            settings = AppSettings(cache_root=directory, rate_limit_per_minute=1)
+            app = create_app(settings=settings)
+            client = TestClient(app)
+
+            first = client.get("/api/sources")
+            second = client.get("/api/sources")
+            health = client.get("/health")
+
+        self.assertEqual(first.status_code, 200)
+        self.assertEqual(second.status_code, 429)
+        self.assertEqual(health.status_code, 200)
+
+    def test_cache_cleanup_removes_expired_public_source_files(self):
+        with tempfile.TemporaryDirectory() as directory:
+            cache = FinderCache(directory)
+            cache.set(
+                "clinicaltrials_gov",
+                "systemic lupus erythematosus",
+                "Shanghai",
+                100,
+                ["RECRUITING"],
+                raw={"studies": []},
+                normalized=[],
+            )
+            with sqlite3.connect(Path(directory) / "metadata.sqlite3") as conn:
+                row = conn.execute("SELECT cache_key, raw_path, normalized_path FROM cache_entries").fetchone()
+                conn.execute("UPDATE cache_entries SET cache_date = '2020-01-01' WHERE cache_key = ?", (row[0],))
+
+            removed = cache.cleanup_older_than(1)
+
+            self.assertEqual(removed, 1)
+            self.assertFalse((Path(directory) / row[1]).exists())
+            self.assertFalse((Path(directory) / row[2]).exists())
+            with sqlite3.connect(Path(directory) / "metadata.sqlite3") as conn:
+                remaining = conn.execute("SELECT COUNT(*) FROM cache_entries").fetchone()[0]
+            self.assertEqual(remaining, 0)
+
 
 class GeoTests(unittest.TestCase):
     def test_resolve_location_accepts_coordinates(self):
@@ -186,6 +243,32 @@ class GeoTests(unittest.TestCase):
         self.assertEqual(location["method"], "local_gazetteer")
         self.assertEqual(location["lat"], 30.2741)
         self.assertEqual(location["lon"], 120.1551)
+
+    def test_resolve_location_can_use_optional_nominatim_without_persisting_text(self):
+        class FakeResponse:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, traceback):
+                return False
+
+            def read(self):
+                return json.dumps([{"lat": "51.5", "lon": "-0.12", "display_name": "Example Place"}]).encode()
+
+        with patch("trial_finder.geo.urllib.request.urlopen", return_value=FakeResponse()) as urlopen:
+            location = resolve_location("Example Place", provider="nominatim")
+
+        self.assertEqual(location["method"], "nominatim")
+        self.assertEqual(location["lat"], 51.5)
+        self.assertEqual(location["lon"], -0.12)
+        self.assertIn("q=Example+Place", urlopen.call_args.args[0].full_url)
+
+    def test_resolve_location_falls_back_when_optional_geocoder_fails(self):
+        with patch("trial_finder.geo.urllib.request.urlopen", side_effect=urllib.error.URLError("offline")):
+            location = resolve_location("Unknown Test City", provider="nominatim")
+
+        self.assertEqual(location["method"], "source_location_text")
+        self.assertIsNone(location["lat"])
 
 
 if __name__ == "__main__":

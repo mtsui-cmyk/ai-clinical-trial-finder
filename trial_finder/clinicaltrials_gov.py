@@ -24,8 +24,9 @@ def build_search_params(
     radius_km: int,
     statuses: list[str] | None = None,
     page_size: int = 100,
+    geocoder_provider: str | None = None,
 ) -> dict[str, str]:
-    location = resolve_location(location_text)
+    location = resolve_location(location_text, provider=geocoder_provider)
     params = {
         "query.cond": condition_text.strip(),
         "filter.overallStatus": ",".join(statuses or DEFAULT_STATUSES),
@@ -49,10 +50,11 @@ def fetch_search(
     limit: int = 200,
     timeout: int = 45,
     sleep: float = 0.1,
+    geocoder_provider: str | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     studies: list[dict[str, Any]] = []
-    location = resolve_location(location_text)
-    params = build_search_params(condition_text, location_text, radius_km, statuses, page_size)
+    location = resolve_location(location_text, provider=geocoder_provider)
+    params = build_search_params(condition_text, location_text, radius_km, statuses, page_size, geocoder_provider)
     page_token = None
     data_timestamp = None
 
@@ -88,8 +90,9 @@ def normalize_for_finder(
     condition_text: str,
     location_text: str,
     radius_km: int,
+    geocoder_provider: str | None = None,
 ) -> list[dict[str, Any]]:
-    location = resolve_location(location_text)
+    location = resolve_location(location_text, provider=geocoder_provider)
     normalized: list[dict[str, Any]] = []
     for study in studies:
         trial = trial_radar.normalize_study(study)

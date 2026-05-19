@@ -116,6 +116,27 @@ class FinderCache:
             )
         return key["cache_key"]
 
+    def cleanup_older_than(self, days: int) -> int:
+        """Remove cache rows and JSON files older than the retention window."""
+        if days <= 0:
+            return 0
+        cutoff = (dt.date.today() - dt.timedelta(days=days)).isoformat()
+        with sqlite3.connect(self.db_path) as conn:
+            rows = conn.execute(
+                "SELECT cache_key, raw_path, normalized_path FROM cache_entries WHERE cache_date < ?",
+                (cutoff,),
+            ).fetchall()
+            conn.execute("DELETE FROM cache_entries WHERE cache_date < ?", (cutoff,))
+
+        for _, raw_path, normalized_path in rows:
+            for relative_path in (raw_path, normalized_path):
+                path = self.root / relative_path
+                try:
+                    path.unlink()
+                except FileNotFoundError:
+                    pass
+        return len(rows)
+
 
 def _sha256(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()

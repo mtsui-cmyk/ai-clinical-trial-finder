@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
-import os
+import time
 from pathlib import Path
 from typing import Any
 
 try:
-    from fastapi import FastAPI, HTTPException
+    from fastapi import FastAPI, HTTPException, Request
     from fastapi.middleware.cors import CORSMiddleware
+    from fastapi.responses import JSONResponse
     from fastapi.staticfiles import StaticFiles
     from pydantic import BaseModel, Field
 except ImportError as exc:  # pragma: no cover - exercised only when dependencies are missing.
@@ -25,6 +26,7 @@ from trial_finder.clinicaltrials_gov import (
     summarize_trial_for_search,
 )
 from trial_finder.conditions import suggest_conditions
+from trial_finder.settings import AppSettings, load_settings
 from trial_finder.source_catalog import list_sources, source_by_id
 
 
@@ -37,7 +39,8 @@ class SearchRequest(BaseModel):
     limit: int = Field(50, ge=1, le=200)
 
 
-def create_app(cache_root: str | Path | None = None) -> FastAPI:
+def create_app(cache_root: str | Path | None = None, settings: AppSettings | None = None) -> FastAPI:
+    settings = settings or load_settings()
     app = FastAPI(
         title="Open Clinical Trial Finder API",
         description="On-demand public registry search. Not medical advice and does not determine eligibility.",
@@ -45,14 +48,34 @@ def create_app(cache_root: str | Path | None = None) -> FastAPI:
     )
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"],
+        allow_origins=list(settings.allow_origins),
         allow_credentials=False,
         allow_methods=["GET", "POST"],
         allow_headers=["*"],
     )
+    _install_rate_limit(app, settings.rate_limit_per_minute)
 
-    cache = FinderCache(cache_root or os.environ.get("TRIAL_FINDER_CACHE", ".trial-finder-cache"))
+    cache = FinderCache(cache_root or settings.cache_root)
+    removed_cache_entries = cache.cleanup_older_than(settings.cache_ttl_days)
     detail_store: dict[str, dict[str, Any]] = {}
+    app.state.settings = settings
+    app.state.cache_cleanup_removed = removed_cache_entries
+
+    @app.get("/health")
+    def health() -> dict[str, Any]:
+        sources = list_sources()
+        connected_sources = [source for source in sources if source["status"] == "connected"]
+        return {
+            "status": "ok",
+            "service": "trialcompass-api",
+            "version": app.version,
+            "connected_sources": len(connected_sources),
+            "source_catalog_size": len(sources),
+            "cache_ttl_days": settings.cache_ttl_days,
+            "cache_cleanup_removed": app.state.cache_cleanup_removed,
+            "geocoder": settings.geocoder,
+            "privacy": "No patient profile or raw location history is stored by the runtime cache.",
+        }
 
     @app.get("/api/sources")
     def api_sources() -> dict[str, Any]:
@@ -102,8 +125,15 @@ def create_app(cache_root: str | Path | None = None) -> FastAPI:
                     radius_km=payload.radius_km,
                     statuses=payload.statuses,
                     limit=payload.limit,
+                    geocoder_provider=settings.geocoder,
                 )
-                normalized = normalize_for_finder(raw, payload.condition_text, payload.location_text, payload.radius_km)
+                normalized = normalize_for_finder(
+                    raw,
+                    payload.condition_text,
+                    payload.location_text,
+                    payload.radius_km,
+                    geocoder_provider=settings.geocoder,
+                )
                 cache.set(source_id, payload.condition_text, payload.location_text, payload.radius_km, payload.statuses, {"meta": meta, "studies": raw}, normalized)
                 cache_status = "miss"
 
@@ -158,6 +188,35 @@ def create_app(cache_root: str | Path | None = None) -> FastAPI:
         app.mount("/", StaticFiles(directory=site_path, html=True), name="site")
 
     return app
+
+
+def _install_rate_limit(app: FastAPI, limit_per_minute: int) -> None:
+    if limit_per_minute <= 0:
+        return
+    hits: dict[str, list[float]] = {}
+
+    @app.middleware("http")
+    async def rate_limit(request: Request, call_next):
+        path = request.url.path
+        if not path.startswith("/api/"):
+            return await call_next(request)
+
+        now = time.monotonic()
+        window_start = now - 60
+        client_host = request.client.host if request.client else "unknown"
+        client_hits = [timestamp for timestamp in hits.get(client_host, []) if timestamp >= window_start]
+        if len(client_hits) >= limit_per_minute:
+            hits[client_host] = client_hits
+            return JSONResponse(
+                status_code=429,
+                content={
+                    "detail": "Rate limit exceeded. Please wait before searching again.",
+                    "safety_note": "The finder uses public registry data only and does not determine eligibility.",
+                },
+            )
+        client_hits.append(now)
+        hits[client_host] = client_hits
+        return await call_next(request)
 
 
 def _load_json_list(path: Path) -> list[dict[str, Any]]:

@@ -2,8 +2,12 @@
 
 from __future__ import annotations
 
+import json
 import math
+import os
 import re
+import urllib.parse
+import urllib.request
 
 
 # Small seed gazetteer for MVP tests and common first searches. Unknown locations
@@ -27,7 +31,7 @@ GAZETTEER: dict[str, tuple[float, float]] = {
 }
 
 
-def resolve_location(location_text: str) -> dict[str, object]:
+def resolve_location(location_text: str, provider: str | None = None) -> dict[str, object]:
     text = (location_text or "").strip()
     if not text:
         return {"query_text": "", "lat": None, "lon": None, "method": "none"}
@@ -43,6 +47,12 @@ def resolve_location(location_text: str) -> dict[str, object]:
     if coords:
         return {"query_text": text, "lat": coords[0], "lon": coords[1], "method": "local_gazetteer"}
 
+    selected_provider = (provider or os.environ.get("TRIAL_FINDER_GEOCODER", "local")).strip().lower()
+    if selected_provider == "nominatim":
+        resolved = _resolve_with_nominatim(text)
+        if resolved:
+            return resolved
+
     return {"query_text": text, "lat": None, "lon": None, "method": "source_location_text"}
 
 
@@ -54,3 +64,36 @@ def haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     d_lambda = math.radians(lon2 - lon1)
     a = math.sin(d_phi / 2) ** 2 + math.cos(phi1) * math.cos(phi2) * math.sin(d_lambda / 2) ** 2
     return radius_km * 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+
+
+def _resolve_with_nominatim(location_text: str) -> dict[str, object] | None:
+    params = urllib.parse.urlencode({"q": location_text, "format": "jsonv2", "limit": "1"})
+    url = f"https://nominatim.openstreetmap.org/search?{params}"
+    timeout = int(os.environ.get("TRIAL_FINDER_GEOCODER_TIMEOUT", "5"))
+    request = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "TrialCompass/0.1 public-registry-trial-finder",
+            "Accept": "application/json",
+        },
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except Exception:
+        return None
+    if not payload:
+        return None
+    first = payload[0]
+    try:
+        lat = float(first["lat"])
+        lon = float(first["lon"])
+    except (KeyError, TypeError, ValueError):
+        return None
+    return {
+        "query_text": location_text,
+        "lat": lat,
+        "lon": lon,
+        "method": "nominatim",
+        "display_name": first.get("display_name"),
+    }
