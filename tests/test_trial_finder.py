@@ -8,6 +8,7 @@ from unittest.mock import patch
 from fastapi.testclient import TestClient
 
 from scripts import trial_radar
+from trial_finder.ai_engine import build_ai_reading, build_trial_reading_prompt
 from trial_finder.cache import FinderCache
 from trial_finder.clinicaltrials_gov import build_search_params, normalize_for_finder
 from trial_finder.geo import resolve_location
@@ -97,8 +98,19 @@ class TrialFinderTests(unittest.TestCase):
         self.assertAlmostEqual(normalized[0]["distance_km"], 1.7, delta=0.5)
         self.assertAlmostEqual(normalized[0]["nearest_location"]["distance_km"], 1.7, delta=0.5)
         self.assertIn("does not determine eligibility", normalized[0]["finder_safety_note"])
-        self.assertEqual(normalized[0]["research_radar"]["mode"], "AI reading aid from public registry fields")
+        self.assertEqual(normalized[0]["research_radar"]["mode"], "Source-grounded AI reading aid")
         self.assertIn("official registry", " ".join(normalized[0]["research_radar"]["signals"]))
+        self.assertEqual(normalized[0]["research_radar"]["prompt_contract"]["provider"], "local_deterministic_mvp")
+
+    def test_ai_engine_builds_source_grounded_prompt_contract(self):
+        normalized = normalize_for_finder([sample_study_with_geo()], "systemic lupus erythematosus", "Shanghai", 100)[0]
+        prompt = build_trial_reading_prompt(normalized)
+        reading = build_ai_reading(normalized)
+
+        self.assertEqual(prompt["task"], "Explain this public clinical trial registry record as a patient-facing reading aid.")
+        self.assertIn("recommend a trial", prompt["hard_rules"])
+        self.assertEqual(prompt["source_fields"]["nearest_site"]["city"], "Shanghai")
+        self.assertIn("must not recommend", reading["safety_note"])
 
     def test_cache_hashes_location_metadata_without_plaintext_location(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -153,6 +165,11 @@ class TrialFinderTests(unittest.TestCase):
             detail = client.get(f"/api/trials/{detail_key}").json()["trial"]
             self.assertEqual(detail["nearest_location"]["facility"], "RenJi Hospital")
             self.assertIn("Verify details in the official registry", detail["finder_safety_note"])
+
+            ai_response = client.get(f"/api/ai/read-trial/{detail_key}").json()
+            self.assertEqual(ai_response["trial_id"], "NCT00000001")
+            self.assertIn("prompt", ai_response)
+            self.assertIn("does not recommend", ai_response["safety_note"])
 
 
 class GeoTests(unittest.TestCase):

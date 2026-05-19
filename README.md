@@ -65,12 +65,14 @@ ClinicalTrials.gov does not require an API key.
 
 ## Technical Architecture
 
+- Source-grounded AI engine with prompt contracts and safety rules.
 - FastAPI backend for on-demand trial search.
 - Source connector layer for registry-specific APIs.
 - Normalized trial model with source records, site status, geo points, contacts, and official registry links.
+- Dedicated AI reading endpoint for trial-level explanations.
 - Query-time distance sorting from typed city/postcode; no browser location permission is required.
 - Hash-based runtime cache that avoids storing raw user location history.
-- AI Research Radar reading layer that explains public registry fields without recommending trials or deciding eligibility.
+- Local deterministic AI reading fallback so no provider key is needed in the browser.
 - Generated disease radars and bulk static pages are treated as build artifacts, not core source code.
 
 ## Safety Boundaries
@@ -128,6 +130,7 @@ See [SECURITY.md](SECURITY.md) and [docs/PUBLISHING.md](docs/PUBLISHING.md) befo
 ## Project Structure
 
 - `trial_finder/`: FastAPI runtime finder and source connectors
+- `trial_finder/ai_engine.py`: source-grounded AI reading contract and local fallback
 - `site/`: static web pages
 - `scripts/`: data normalization, radar generation, optional AI workflows
 - `configs/`: disease/source configuration

@@ -17,6 +17,7 @@ except ImportError as exc:  # pragma: no cover - exercised only when dependencie
     ) from exc
 
 from trial_finder.cache import FinderCache
+from trial_finder.ai_engine import build_ai_reading, build_trial_reading_prompt
 from trial_finder.clinicaltrials_gov import (
     DEFAULT_STATUSES,
     fetch_search,
@@ -139,6 +140,18 @@ def create_app(cache_root: str | Path | None = None) -> FastAPI:
                 if item.get("canonical_trial_key") == canonical_trial_key:
                     return {"trial": item}
         raise HTTPException(status_code=404, detail="Trial detail is not in the runtime cache. Run a search first or regenerate local data.")
+
+    @app.get("/api/ai/read-trial/{canonical_trial_key}")
+    def api_ai_trial_reading(canonical_trial_key: str) -> dict[str, Any]:
+        trial = detail_store.get(canonical_trial_key)
+        if not trial:
+            raise HTTPException(status_code=404, detail="Run a search first so the trial is available in the runtime AI context.")
+        return {
+            "trial_id": trial.get("trial_id"),
+            "reading": build_ai_reading(trial),
+            "prompt": build_trial_reading_prompt(trial),
+            "safety_note": "This endpoint explains public registry fields only. It does not recommend a trial or determine eligibility.",
+        }
 
     site_path = Path("site")
     if site_path.exists():

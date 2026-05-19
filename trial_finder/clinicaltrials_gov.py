@@ -9,6 +9,7 @@ import urllib.request
 from typing import Any
 
 from scripts import trial_radar
+from trial_finder.ai_engine import build_ai_reading
 from trial_finder.geo import haversine_km, resolve_location
 
 
@@ -102,7 +103,7 @@ def normalize_for_finder(
             "This result may be recruiting near this location based on public registry data. "
             "Verify details in the official registry. This tool does not determine eligibility and is not medical advice."
         )
-        trial["research_radar"] = build_research_radar(trial)
+        trial["research_radar"] = build_ai_reading(trial)
         normalized.append(trial)
 
     normalized.sort(key=lambda item: (item.get("distance_km") is None, item.get("distance_km") or 10**9, item.get("title") or ""))
@@ -151,34 +152,4 @@ def summarize_trial_for_search(trial: dict[str, Any]) -> dict[str, Any]:
         "distance_km": trial.get("distance_km"),
         "finder_safety_note": trial.get("finder_safety_note"),
         "research_radar": trial.get("research_radar", {}),
-    }
-
-
-def build_research_radar(trial: dict[str, Any]) -> dict[str, Any]:
-    """Build a source-grounded reading aid from public registry fields."""
-    status = str(trial.get("status") or "status not listed").replace("_", " ").title()
-    phase = trial.get("phase") or "phase not listed"
-    conditions = trial.get("conditions") or []
-    interventions = trial.get("intervention_names") or []
-    nearest = trial.get("nearest_location") or {}
-    site_status = str(nearest.get("status") or "site status not listed").replace("_", " ").title()
-
-    focus = ", ".join(conditions[:2]) if conditions else "the searched condition"
-    intervention_text = ", ".join(interventions[:3]) if interventions else "interventions not listed in the normalized view"
-    location_text = ", ".join(
-        str(part)
-        for part in [nearest.get("facility"), nearest.get("city"), nearest.get("country")]
-        if part
-    ) or "the listed site"
-
-    return {
-        "mode": "AI reading aid from public registry fields",
-        "summary": f"{status} {phase} record for {focus}. Nearest listed site: {location_text} ({site_status}).",
-        "signals": [
-            f"Intervention area: {intervention_text}.",
-            "Check the official registry for current site status, contacts, and inclusion/exclusion text.",
-            "Use this as research context only; it does not determine eligibility.",
-        ],
-        "questions": (trial.get("questions_to_ask") or [])[:3],
-        "safety_note": "AI may explain public registry fields, but must not recommend a trial or decide eligibility.",
     }
