@@ -1,0 +1,4 @@
+# Keep GitHub language stats focused on source code, not demo/static artifacts.
+site/*.html linguist-generated
+docs/assets/* linguist-generated
+tests/fixtures/** linguist-generated

@@ -6,6 +6,12 @@ The goal is simple: patients should be able to search public clinical trial regi
 
 This project is not a medical decision tool. It does not recommend treatments, rank trials, decide eligibility, interpret personal medical records, collect patient health data, or store patient location profiles.
 
+![MIT License](https://img.shields.io/badge/license-MIT-green)
+![FastAPI](https://img.shields.io/badge/API-FastAPI-009688)
+![ClinicalTrials.gov](https://img.shields.io/badge/source-ClinicalTrials.gov-blue)
+![Privacy](https://img.shields.io/badge/privacy-no_patient_profiles-purple)
+![AI Safety](https://img.shields.io/badge/AI-source_grounded_reading_aid-orange)
+
 Suggested GitHub repository name:
 
 ```text
@@ -56,6 +62,16 @@ This project aims to give patients their own AI-driven search layer over public 
 - AI Research Radar: public-registry reading aid, research context, verification prompts, and clinician discussion questions
 
 ClinicalTrials.gov does not require an API key.
+
+## Technical Architecture
+
+- FastAPI backend for on-demand trial search.
+- Source connector layer for registry-specific APIs.
+- Normalized trial model with source records, site status, geo points, contacts, and official registry links.
+- Query-time distance sorting from typed city/postcode; no browser location permission is required.
+- Hash-based runtime cache that avoids storing raw user location history.
+- AI Research Radar reading layer that explains public registry fields without recommending trials or deciding eligibility.
+- Generated disease radars and bulk static pages are treated as build artifacts, not core source code.
 
 ## Safety Boundaries
 
