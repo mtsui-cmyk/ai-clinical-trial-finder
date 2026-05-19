@@ -1,0 +1,30 @@
+services:
+  trialcompass:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      TRIAL_FINDER_CACHE: /app/.trial-finder-cache
+      TRIAL_FINDER_CACHE_TTL_DAYS: "7"
+      TRIAL_FINDER_RATE_LIMIT_PER_MINUTE: "60"
+      TRIAL_FINDER_ALLOW_ORIGINS: "*"
+      TRIAL_FINDER_GEOCODER: local
+      TRIAL_FINDER_UVICORN_HOST: 0.0.0.0
+      TRIAL_FINDER_UVICORN_PORT: "8000"
+    volumes:
+      - trialcompass-cache:/app/.trial-finder-cache
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3).read()",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+volumes:
+  trialcompass-cache:

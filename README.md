@@ -11,6 +11,7 @@ This project is not a medical decision tool. It does not recommend treatments, r
 ![ClinicalTrials.gov](https://img.shields.io/badge/source-ClinicalTrials.gov-blue)
 ![Privacy](https://img.shields.io/badge/privacy-no_patient_profiles-purple)
 ![AI Safety](https://img.shields.io/badge/AI-source_grounded_reading_aid-orange)
+![Docker](https://img.shields.io/badge/deploy-Docker-2496ED)
 
 Suggested GitHub repository name:
 
@@ -96,6 +97,8 @@ The tool must not:
 
 ## Quick Start
 
+### Python
+
 ```bash
 python3 -m pip install -r requirements.txt
 python3 -m unittest discover -s tests -v
@@ -117,6 +120,24 @@ radius: 100 km
 source: ClinicalTrials.gov
 ```
 
+### Docker
+
+```bash
+docker compose up --build
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8000/finder.html
+```
+
+Check the backend:
+
+```bash
+curl http://127.0.0.1:8000/health
+```
+
 ## API Keys and Privacy
 
 The finder can run with ClinicalTrials.gov without any API key.
@@ -126,6 +147,12 @@ Optional AI enrichment scripts can use provider keys through environment variabl
 Runtime cache files are written under `.trial-finder-cache/`, which is ignored by git. Cache metadata stores query hashes rather than raw user location text.
 
 See [SECURITY.md](SECURITY.md) and [docs/PUBLISHING.md](docs/PUBLISHING.md) before publishing or deploying.
+
+## Deployment
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for Docker, Render, Railway, Fly.io, GitHub Pages plus backend, health checks, and runtime environment variables.
+
+TrialCompass does not include default telemetry or call-home tracking. If you deploy or adapt this project, you are welcome to add your public deployment to [WHO_IS_USING.md](WHO_IS_USING.md) through an issue or pull request.
 
 ## Project Structure
 
