@@ -76,6 +76,23 @@ class TrialFinderTests(unittest.TestCase):
         self.assertNotIn("eligible for you", page.lower())
         self.assertNotIn("recommended", page.lower())
 
+    def test_learn_and_updates_pages_are_not_placeholders(self):
+        learn = (ROOT / "site/explorer.html").read_text()
+        updates = (ROOT / "site/changes.html").read_text()
+
+        self.assertIn("Read public clinical trial records with more context", learn)
+        self.assertIn("How to use the finder", learn)
+        self.assertIn("What the main fields mean", learn)
+        self.assertIn("What AI can do here", learn)
+        self.assertIn("does not recommend a trial", learn)
+
+        self.assertIn("Runtime status, source coverage, and product changes", updates)
+        self.assertIn("Current runtime", updates)
+        self.assertIn("Source status", updates)
+        self.assertIn("Product change log", updates)
+        self.assertIn("Weekly public-data reports", updates)
+        self.assertIn("does not determine eligibility", updates)
+
     def test_clinicaltrials_query_uses_geo_filter_for_resolved_location(self):
         params = build_search_params("systemic lupus erythematosus", "Shanghai", 100)
 
